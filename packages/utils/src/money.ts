@@ -38,7 +38,7 @@ export function multiplyPrice(price: number, qty: number): number {
  * @example sumMoney([1.1, 2.2, 3.3]) // 6.6
  */
 export function sumMoney(amounts: number[]): number {
-  if (!Array.isArray(amounts) || amounts.length === 0) {
+  if (amounts.length === 0) {
     return 0
   }
   const total = amounts.reduce((acc, n) => {
@@ -57,9 +57,9 @@ export function isValidMoney(n: number): boolean {
   if (!Number.isFinite(n) || n < 0) {
     return false
   }
-  // 检查精度：乘以 100 后应为整数
+  // 检查精度：乘以 100 后应接近整数（容差 1e-9 应对浮点误差，如 0.55*100=55.00000000000001）
   const scaled = n * 100
-  return Math.abs(scaled - Math.round(scaled)) < Number.EPSILON
+  return Math.abs(scaled - Math.round(scaled)) < 1e-9
 }
 
 export { MONEY_PRECISION }

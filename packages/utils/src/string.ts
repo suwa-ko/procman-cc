@@ -11,7 +11,7 @@
  * @example mask("admin@example.com", 2, 4) // "ad****.com"
  */
 export function mask(input: string, keepStart = 1, keepEnd = 1): string {
-  if (typeof input !== "string" || input.length === 0) {
+  if (input.length === 0) {
     return ""
   }
   if (keepStart < 0 || keepEnd < 0) {
@@ -79,9 +79,6 @@ export function maskCreditCode(code: string): string {
  * @example truncate("这是一段很长的文本", 5) // "这是一段..."
  */
 export function truncate(input: string, maxLen: number): string {
-  if (typeof input !== "string") {
-    return ""
-  }
   if (maxLen < 0) {
     throw new Error("maxLen 必须非负")
   }

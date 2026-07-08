@@ -13,24 +13,24 @@ export class ConsoleTransport implements LogTransport {
   write(entry: LogEntry): void {
     const { level, message, context, timestamp } = entry
     const prefix = `[${timestamp}] [${entry.levelName.toUpperCase()}]`
-    const fullMessage =
-      context !== undefined ? `${prefix} ${message}` : `${prefix} ${message}`
+    const fullMessage = `${prefix} ${message}`
+    const args: unknown[] = context !== undefined ? [context] : []
 
     switch (level) {
       case LogLevel.Debug:
-        console.debug(fullMessage, context ?? "")
+        console.debug(fullMessage, ...args)
         break
       case LogLevel.Info:
-        console.info(fullMessage, context ?? "")
+        console.info(fullMessage, ...args)
         break
       case LogLevel.Warn:
-        console.warn(fullMessage, context ?? "")
+        console.warn(fullMessage, ...args)
         break
       case LogLevel.Error:
-        console.error(fullMessage, context ?? "")
+        console.error(fullMessage, ...args)
         break
       default:
-        console.log(fullMessage, context ?? "")
+        console.log(fullMessage, ...args)
     }
   }
 }

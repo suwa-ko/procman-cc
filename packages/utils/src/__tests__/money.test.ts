@@ -93,6 +93,14 @@ describe("money", () => {
       expect(isValidMoney(100.55)).toBe(true)
     })
 
+    it("两位小数金额应返回 true（含浮点误差场景）", () => {
+      // 0.55 * 100 = 55.00000000000001，存在浮点误差，仍应判定为合法
+      expect(isValidMoney(0.55)).toBe(true)
+      expect(isValidMoney(0.01)).toBe(true)
+      expect(isValidMoney(0.99)).toBe(true)
+      expect(isValidMoney(9.99)).toBe(true)
+    })
+
     it("超过两位小数应返回 false", () => {
       expect(isValidMoney(100.555)).toBe(false)
       expect(isValidMoney(0.001)).toBe(false)
