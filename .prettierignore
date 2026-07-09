@@ -1,0 +1,17 @@
+# 自动生成的文件
+pnpm-lock.yaml
+
+# 构建产物
+dist
+build
+*.d.ts
+
+# 依赖
+node_modules
+
+# 测试覆盖率
+coverage
+
+# IDE / 工具配置目录
+.trae
+.vscode

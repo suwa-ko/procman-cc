@@ -14,7 +14,7 @@ export const CODE_PREFIXES: readonly CodePrefix[] = [
   "PRC",
   "CTT",
   "TPL",
-] as const
+]
 
 /** 流水号位数 */
 const SEQ_LENGTH = 4

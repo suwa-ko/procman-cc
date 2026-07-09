@@ -9,5 +9,8 @@ export default defineConfig({
       formats: ["es", "cjs"],
       fileName: (format) => (format === "es" ? "index.mjs" : "index.cjs"),
     },
+    rollupOptions: {
+      external: ["@supabase/supabase-js", "@ps/log", "@ps/types-base"],
+    },
   },
 })

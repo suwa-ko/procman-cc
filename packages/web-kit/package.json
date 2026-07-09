@@ -1,8 +1,8 @@
 {
-  "name": "@ps/utils",
+  "name": "@ps/web-kit",
   "version": "0.0.0",
   "private": true,
-  "description": "纯函数工具包 — 编码生成、金额计算、日期格式化、字符串脱敏",
+  "description": "前端能力包 — 网络请求封装 + React Hooks + UI 组件（当前迭代：request 模块）",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -24,6 +24,9 @@
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src --ext .ts"
+  },
+  "dependencies": {
+    "@ps/types-base": "workspace:*"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "catalog:",

@@ -315,9 +315,7 @@ module.exports = {
     "new-cap": "error",
     // 强制 new 时调用括号
     "new-parens": "error",
-    // 禁止遗留的 ES5 调用方式
-    "no-caller": "error",
-    // 禁止 arguments.caller / arguments.callee
+    // 禁止遗留的 ES5 调用方式（arguments.caller / arguments.callee）
     "no-caller": "error",
     // 禁止删除变量
     "no-delete-var": "error",
@@ -345,9 +343,6 @@ module.exports = {
     "build",
     "node_modules",
     "coverage",
-    "*.config.js",
-    "*.config.cjs",
-    "*.config.ts",
     "pnpm-workspace.yaml",
   ],
   overrides: [
