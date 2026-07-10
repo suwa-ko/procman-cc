@@ -147,7 +147,9 @@ module.exports = {
       {
         devDependencies: [
           "**/*.test.ts",
+          "**/*.test.tsx",
           "**/*.spec.ts",
+          "**/*.spec.tsx",
           "**/vitest.config.ts",
           "**/vite.config.ts",
           "**/.eslintrc.cjs",

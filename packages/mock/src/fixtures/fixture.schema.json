@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fixture.schema.json",
+  "title": "Mock Fixture",
+  "description": "@ps/mock 测试夹具的统一 Schema 定义",
+  "type": "object",
+  "required": ["description", "generatedAt", "data"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema 引用"
+    },
+    "description": {
+      "type": "string",
+      "description": "夹具用途说明"
+    },
+    "generatedAt": {
+      "type": "string",
+      "description": "生成日期"
+    },
+    "data": {
+      "description": "夹具数据（对象或数组）"
+    },
+    "entries": {
+      "type": "array",
+      "description": "合同明细条目（仅合同类夹具）"
+    }
+  }
+}

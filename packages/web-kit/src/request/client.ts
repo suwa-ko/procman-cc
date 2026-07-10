@@ -69,7 +69,11 @@ function extractDetails(data: unknown): Record<string, unknown> | undefined {
     return undefined
   }
   const obj = data as Record<string, unknown>
-  if ("details" in obj && typeof obj.details === "object" && obj.details !== null) {
+  if (
+    "details" in obj &&
+    typeof obj.details === "object" &&
+    obj.details !== null
+  ) {
     return obj.details as Record<string, unknown>
   }
   return undefined
@@ -202,14 +206,11 @@ function createHttpError(response: ResponseContext): HttpClientError {
       config: response.config,
     })
   }
-  return new HttpClientError(
-    `HTTP ${response.status} ${response.statusText}`,
-    {
-      status: response.status,
-      details: extractDetails(data),
-      config: response.config,
-    }
-  )
+  return new HttpClientError(`HTTP ${response.status} ${response.statusText}`, {
+    status: response.status,
+    details: extractDetails(data),
+    config: response.config,
+  })
 }
 
 /** 解包 ApiResponse：成功返回 data，失败抛出 HttpClientError；非 ApiResponse 返回原始数据 */

@@ -1,9 +1,10 @@
-import {
-  applyFilters,
-  applySorts,
-  paginationToRange,
-} from "./query-builder"
-import type { BaseEntity, DbClient, PaginatedResult, QueryParams } from "./types"
+import { applyFilters, applySorts, paginationToRange } from "./query-builder"
+import type {
+  BaseEntity,
+  DbClient,
+  PaginatedResult,
+  QueryParams,
+} from "./types"
 
 /**
  * 基础 Repository：封装数据库表的原子 CRUD 操作。

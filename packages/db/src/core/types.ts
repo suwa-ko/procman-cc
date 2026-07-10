@@ -79,15 +79,7 @@ export interface DbClient {
 
 /** 过滤操作符（对齐 supabase-js PostgREST 过滤器） */
 export type FilterOperator =
-  | "eq"
-  | "neq"
-  | "gt"
-  | "lt"
-  | "gte"
-  | "lte"
-  | "like"
-  | "ilike"
-  | "in"
+  "eq" | "neq" | "gt" | "lt" | "gte" | "lte" | "like" | "ilike" | "in"
 
 /** 单个过滤条件 */
 export interface QueryFilter {

@@ -66,8 +66,8 @@ export type ResponseInterceptor = (
 ) => ResponseContext | Promise<ResponseContext>
 
 /**
- * HTTP 客户端创建选项。
- * baseURL 由 apps 层从 env-config 注入（依赖注入，不自行读取 env-config）。
+ * HTTP 客户端创建选项（createHttpClient 使用）。
+ * baseURL 直接注入；若需环境感知初始化请使用 setupHttpClient()（自动对接 env-config）。
  */
 export interface HttpClientOptions {
   baseURL: string

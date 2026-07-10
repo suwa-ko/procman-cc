@@ -5,8 +5,13 @@
  */
 
 export { createDbClient } from "./core/client"
+export { createMockDbClient } from "./core/mock-client"
 export { BaseRepository } from "./core/base-repository"
-export { applyFilters, applySorts, paginationToRange } from "./core/query-builder"
+export {
+  applyFilters,
+  applySorts,
+  paginationToRange,
+} from "./core/query-builder"
 export type {
   BaseEntity,
   DbClient,

@@ -5,6 +5,8 @@
  */
 
 export { createHttpClient } from "./client"
+export { getHttpClient, resetHttpClient, setupHttpClient } from "./setup"
+export type { SetupHttpClientOptions } from "./setup"
 export { HttpClientError } from "./error"
 export type {
   HttpClient,

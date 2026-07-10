@@ -1,0 +1,43 @@
+{
+  "$schema": "fixture.schema.json",
+  "description": "NDA 保密协议合同测试夹具",
+  "generatedAt": "2026-07-10",
+  "data": {
+    "id": "660e8400-e29b-41d4-a716-446655440010",
+    "code": "CTT-2026-0010",
+    "name": "NDA保密协议-深圳科技有限公司",
+    "type": "nda",
+    "supplierId": "550e8400-e29b-41d4-a716-446655440001",
+    "handlerId": "770e8400-e29b-41d4-a716-446655440001",
+    "handlerName": "经办人A",
+    "templateId": "880e8400-e29b-41d4-a716-446655440001",
+    "content": {
+      "contractName": "NDA保密协议",
+      "supplierName": "深圳科技有限公司",
+      "confidentialPeriod": "3年",
+      "jurisdiction": "深圳"
+    },
+    "totalAmount": 0,
+    "effectiveDate": "2026-07-01",
+    "expirationDate": "2029-06-30",
+    "status": "effective",
+    "companyName": "本公司",
+    "createdAt": "2026-06-25T08:00:00.000Z",
+    "updatedAt": "2026-07-01T00:00:00.000Z"
+  },
+  "entries": [
+    {
+      "id": "660e8400-e29b-41d4-a716-446655440011",
+      "contractId": "660e8400-e29b-41d4-a716-446655440010",
+      "materialId": "",
+      "materialName": "保密信息",
+      "spec": "N/A",
+      "unitPrice": 0,
+      "quantity": 1,
+      "unit": "项",
+      "totalPrice": 0,
+      "remark": "NDA 无物料明细",
+      "sortOrder": 1
+    }
+  ]
+}

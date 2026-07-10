@@ -36,10 +36,14 @@ interface MockChainHandle {
 
 /** 创建 mock 查询链（记录所有链式方法调用） */
 function createMockChain(options: MockChainOptions): MockChainHandle {
-  const arrayResult: QueryResult<unknown[]> =
-    options.arrayResult ?? { data: null, error: null }
-  const singleResult: QueryResult<unknown> =
-    options.singleResult ?? { data: null, error: null }
+  const arrayResult: QueryResult<unknown[]> = options.arrayResult ?? {
+    data: null,
+    error: null,
+  }
+  const singleResult: QueryResult<unknown> = options.singleResult ?? {
+    data: null,
+    error: null,
+  }
   const calls: Record<string, unknown[][]> = {}
   const ref: { current: DbQueryChain | null } = { current: null }
 
@@ -50,10 +54,12 @@ function createMockChain(options: MockChainOptions): MockChainHandle {
     calls[method].push(args)
   }
 
-  const record = (method: string) => (...args: unknown[]): DbQueryChain => {
-    track(method, args)
-    return ref.current as DbQueryChain
-  }
+  const record =
+    (method: string) =>
+    (...args: unknown[]): DbQueryChain => {
+      track(method, args)
+      return ref.current as DbQueryChain
+    }
 
   const chain: Record<string, unknown> = {
     select: record("select"),
@@ -280,7 +286,9 @@ describe("BaseRepository", () => {
       })
       const repo = new BaseRepository<TestEntity>(client, TABLE)
 
-      await expect(repo.insert({ name: "张三", age: 20 })).rejects.toThrow("插入失败")
+      await expect(repo.insert({ name: "张三", age: 20 })).rejects.toThrow(
+        "插入失败"
+      )
       expect(errorCalls).toHaveLength(1)
       expect(errorCalls[0]?.message).toBe("insert 失败")
     })
@@ -463,10 +471,7 @@ describe("BaseRepository", () => {
           { column: "age", operator: "gte", value: 18 },
           { column: "name", operator: "ilike", value: "%test%" },
         ],
-        sorts: [
-          { column: "createdAt", ascending: false },
-          { column: "name" },
-        ],
+        sorts: [{ column: "createdAt", ascending: false }, { column: "name" }],
         pagination: { page: 3, pageSize: 20 },
       })
 
@@ -634,9 +639,7 @@ describe("BaseRepository", () => {
       expect(fromCalls).toEqual([TABLE])
       expect(getCalls("select")).toEqual([["*", { count: "exact" }]])
       expect(getCalls("eq")).toEqual([["status", "active"]])
-      expect(getCalls("order")).toEqual([
-        ["createdAt", { ascending: false }],
-      ])
+      expect(getCalls("order")).toEqual([["createdAt", { ascending: false }]])
       expect(getCalls("range")).toEqual([[15, 29]])
     })
   })

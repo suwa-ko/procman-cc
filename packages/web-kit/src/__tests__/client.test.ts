@@ -39,11 +39,7 @@ function okResponse<T>(data: T): Response {
 }
 
 /** 创建失败 ApiResponse 响应 */
-function errorResponse(
-  code: number,
-  message: string,
-  status = 200
-): Response {
+function errorResponse(code: number, message: string, status = 200): Response {
   return createResponse({ code, data: null, message }, { status })
 }
 
@@ -379,9 +375,7 @@ describe("createHttpClient", () => {
   // ----------------------------------------------------------
   describe("错误处理", () => {
     it("HTTP 404 错误抛出 HttpClientError", async () => {
-      mockFetch.mockResolvedValueOnce(
-        errorResponse(4040, "资源不存在", 404)
-      )
+      mockFetch.mockResolvedValueOnce(errorResponse(4040, "资源不存在", 404))
 
       const client = createHttpClient({ baseURL: "http://api.test" })
       await expect(client.get("/users/999")).rejects.toMatchObject({
