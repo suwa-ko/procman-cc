@@ -8,8 +8,8 @@ import type {
   PricingQueryParams,
   UpdatePricingRequest,
 } from "@ps/contracts"
-import { createCrudHooks } from "@vibe-purchase/hooks-core"
-import type { CrudHooks } from "@vibe-purchase/hooks-core"
+import { createCrudHooks } from "@ps/hooks-core"
+import type { CrudHooks } from "@ps/hooks-core"
 
 const pricingHooks = createCrudHooks<
   PricingDTO,

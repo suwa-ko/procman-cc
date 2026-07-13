@@ -1,5 +1,5 @@
 {
-  "name": "@vibe-purchase/hooks-business",
+  "name": "@ps/hooks-business",
   "version": "0.0.0",
   "private": true,
   "description": "业务 Hook 库 — 为所有业务模型提供开箱即用的 CRUD Hooks",
@@ -32,7 +32,7 @@
   "dependencies": {
     "@ps/contracts": "workspace:*",
     "@ps/types-base": "workspace:*",
-    "@vibe-purchase/hooks-core": "workspace:*"
+    "@ps/hooks-core": "workspace:*"
   },
   "devDependencies": {
     "@types/react": "catalog:",

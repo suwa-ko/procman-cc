@@ -56,7 +56,7 @@ function applyOverrides(
   for (const [envKey, configKey] of Object.entries(ENV_KEY_MAP)) {
     const value = overrides[envKey]
     if (value !== undefined && value !== "") {
-      ;(result as Record<string, string>)[configKey] = value
+      (result as Record<string, string>)[configKey] = value
     }
   }
 

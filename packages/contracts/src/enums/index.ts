@@ -1,5 +1,0 @@
-export { SupplierStatus } from "@ps/model"
-export { ContractStatus } from "@ps/model"
-export { ContractType } from "@ps/model"
-export { PricingStatus } from "@ps/model"
-export { MaterialStatus } from "@ps/model"

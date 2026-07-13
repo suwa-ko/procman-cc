@@ -6,7 +6,9 @@
 
 export { createDbClient } from "./core/client"
 export { createMockDbClient } from "./core/mock-client"
+export { MockQueryChain } from "./core/mock-query-chain"
 export { BaseRepository } from "./core/base-repository"
+
 export {
   applyFilters,
   applySorts,

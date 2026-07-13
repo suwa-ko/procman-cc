@@ -1,9 +1,9 @@
 /**
- * @vibe-purchase/hooks-business
+ * @ps/hooks-business
  * 业务 Hook 库
  *
  * 为所有已有业务模型提供开箱即用的 CRUD Hooks。
- * 内部调用 @vibe-purchase/hooks-core 的 createCrudHooks 工厂。
+ * 内部调用 @ps/hooks-core 的 createCrudHooks 工厂。
  */
 
 export {

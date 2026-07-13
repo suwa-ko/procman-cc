@@ -1,5 +1,5 @@
 {
-  "name": "@vibe-purchase/hooks-core",
+  "name": "@ps/hooks-core",
   "version": "0.0.0",
   "private": true,
   "description": "前端 Hook 基础能力库 — 环境管理 / 认证 / 请求客户端 / TanStack Query 封装 / CRUD 工厂",

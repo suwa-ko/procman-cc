@@ -357,15 +357,15 @@ importers:
       '@ps/contracts':
         specifier: workspace:*
         version: link:../contracts
+      '@ps/hooks-core':
+        specifier: workspace:*
+        version: link:../hooks-core
       '@ps/types-base':
         specifier: workspace:*
         version: link:../types-base
       '@tanstack/react-query':
         specifier: 'catalog:'
         version: 5.101.2(react@18.3.1)
-      '@vibe-purchase/hooks-core':
-        specifier: workspace:*
-        version: link:../hooks-core
       react:
         specifier: 'catalog:'
         version: 18.3.1

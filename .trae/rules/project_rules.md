@@ -35,7 +35,7 @@
 
 ## 3. 包结构与依赖方向（铁则）
 
-### 3.1 包列表（9 个 packages + 2 个 apps）
+### 3.1 包列表（13 个 packages + 2 个 apps）
 
 ```
 packages/
@@ -44,10 +44,14 @@ packages/
 ├── contracts/     # API 契约 / DTO / 枚举 / Zod schema（universal）
 ├── env-config/    # 环境配置（universal，零内部依赖）
 ├── log/           # 日志（universal，零内部依赖）
+├── model/         # 纯 Zod Schema + 领域枚举（universal，仅依赖 zod + types-base）
+├── model-core/    # 泛型仓储契约 / 注册表 / 实体映射（universal，依赖 model）
 ├── db/            # Supabase 数据访问层（node）
 ├── pdf/           # PDF 生成（node）
 ├── mock/          # Mock 数据工厂（universal）
-└── web-kit/       # 前端能力包：请求 + Hooks + UI 组件（browser）
+├── web-kit/       # 前端能力包：请求 + Hooks + UI 组件（browser）
+├── hooks-core/    # 前端 Hook 基础库（browser，依赖 web-kit）
+└── hooks-business/ # 业务 CRUD Hooks（browser，依赖 hooks-core + contracts）
 
 apps/
 ├── web/           # 前端应用（browser）
@@ -58,9 +62,10 @@ apps/
 
 ```
 第一层（零内部依赖）：@ps/types-base  @ps/utils  @ps/env-config  @ps/log
-第二层：@ps/contracts  @ps/mock
+第二层：@ps/model  @ps/contracts  @ps/model-core  @ps/mock
 第三层：@ps/db  @ps/pdf
-第四层：@ps/web-kit
+第四层：@ps/web-kit  @ps/hooks-core
+第五层：@ps/hooks-business
 业务层：apps/web  apps/api
 ```
 

@@ -13,7 +13,7 @@ export default defineConfig({
       external: [
         "@ps/contracts",
         "@ps/types-base",
-        "@vibe-purchase/hooks-core",
+        "@ps/hooks-core",
         "@tanstack/react-query",
         "react",
         "react/jsx-runtime",

@@ -7,9 +7,9 @@
 
 
 import type { PersonDTO, PersonQueryParams } from "@ps/contracts"
+import { toQueryParams, useQuery, useRequestClient } from "@ps/hooks-core"
 import type { PaginatedResponse } from "@ps/types-base"
 import type { UseQueryResult } from "@tanstack/react-query"
-import { toQueryParams, useQuery, useRequestClient } from "@vibe-purchase/hooks-core"
 
 const BASE_URL = "/api/persons"
 const QUERY_KEY = ["users"] as const

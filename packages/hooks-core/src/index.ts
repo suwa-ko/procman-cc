@@ -1,5 +1,5 @@
 /**
- * @vibe-purchase/hooks-core
+ * @ps/hooks-core
  * 前端 Hook 基础能力库
  *
  * 提供环境管理、认证管理、请求客户端、TanStack Query 封装、

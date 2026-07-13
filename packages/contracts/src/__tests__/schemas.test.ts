@@ -1,10 +1,12 @@
+import {
+  ContractStatus,
+  ContractType,
+  MaterialStatus,
+  PricingStatus,
+  SupplierStatus,
+} from "@ps/model"
 import { describe, expect, it } from "vitest"
 
-import { ContractStatus } from "../enums/contract-status"
-import { ContractType } from "../enums/contract-type"
-import { MaterialStatus } from "../enums/material-status"
-import { PricingStatus } from "../enums/pricing-status"
-import { SupplierStatus } from "../enums/supplier-status"
 import {
   contractEntrySchema,
   createContractSchema,
