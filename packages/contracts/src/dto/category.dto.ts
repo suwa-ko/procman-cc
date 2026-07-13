@@ -1,4 +1,5 @@
-import type { MaterialStatus } from "../enums/material-status"
+import type { CategoryEntity } from "@ps/model"
+import type { PaginatedResponse } from "@ps/types-base"
 
 /** 物料分类树节点 */
 export interface CategoryTreeNode {
@@ -10,34 +11,22 @@ export interface CategoryTreeNode {
   children: CategoryTreeNode[]
 }
 
-/** 品类 DTO */
-export interface CategoryDTO {
+/** 品类 DTO（含系统字段 id / code） */
+export type CategoryDTO = CategoryEntity & {
   id: string
   code: string
-  name: string
-  parentId: string | null
-  sortOrder: number
 }
 
-/** 创建品类请求 */
-export interface CreateCategoryRequest {
-  name: string
-  parentId?: string | null
-  sortOrder?: number
-}
+export type CreateCategoryRequest = CategoryEntity
+export type UpdateCategoryRequest = Partial<CategoryEntity>
 
-/** 更新品类请求 */
-export interface UpdateCategoryRequest {
-  name?: string
-  parentId?: string | null
-  sortOrder?: number
-}
-
-/** 物料列表查询参数 */
-export interface MaterialQueryParams {
+/** 品类列表查询参数 */
+export interface CategoryQueryParams {
   keyword?: string
-  categoryId?: string
-  status?: MaterialStatus
+  parentId?: string
   page: number
   pageSize: number
 }
+
+/** 品类列表响应 */
+export type CategoryListResponse = PaginatedResponse<CategoryDTO>

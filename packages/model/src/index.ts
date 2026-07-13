@@ -1,0 +1,85 @@
+/**
+ * @ps/model
+ * 业务模型包 — 纯 Zod Schema 定义 + 领域枚举
+ * 仅依赖 zod 和 @ps/types-base，不依赖任何其他 @ps/ 包
+ */
+
+// ---- 领域枚举 ----
+export {
+  SupplierStatus,
+  ContractStatus,
+  ContractType,
+  PricingStatus,
+  MaterialStatus,
+} from "./enums"
+
+// ---- Zod Schema（entity / createInput / updateInput / listQuery） ----
+export {
+  supplierSchema,
+  createSupplierSchema,
+  updateSupplierSchema,
+  supplierQuerySchema,
+  categorySchema,
+  createCategorySchema,
+  updateCategorySchema,
+  categoryQuerySchema,
+  materialSchema,
+  createMaterialSchema,
+  updateMaterialSchema,
+  materialQuerySchema,
+  pricingSchema,
+  createPricingSchema,
+  updatePricingSchema,
+  pricingQuerySchema,
+  contractSchema,
+  contractEntrySchema,
+  createContractSchema,
+  updateContractSchema,
+  createContractEntrySchema,
+  updateContractEntrySchema,
+  contractQuerySchema,
+  templateSchema,
+  templateVariableSchema,
+  createTemplateSchema,
+  updateTemplateSchema,
+  templateQuerySchema,
+  personSchema,
+  personQuerySchema,
+  loginSchema,
+  registerSchema,
+} from "./schemas"
+
+export type {
+  SupplierEntity,
+  CreateSupplierInput,
+  UpdateSupplierInput,
+  SupplierQuery,
+  CategoryEntity,
+  CreateCategoryInput,
+  UpdateCategoryInput,
+  CategoryQuery,
+  MaterialEntity,
+  CreateMaterialInput,
+  UpdateMaterialInput,
+  MaterialQuery,
+  PricingEntity,
+  CreatePricingInput,
+  UpdatePricingInput,
+  PricingQuery,
+  ContractEntity,
+  ContractEntryEntity,
+  CreateContractInput,
+  UpdateContractInput,
+  CreateContractEntryInput,
+  UpdateContractEntryInput,
+  ContractQuery,
+  TemplateEntity,
+  TemplateVariableEntity,
+  CreateTemplateInput,
+  UpdateTemplateInput,
+  TemplateQuery,
+  PersonEntity,
+  PersonQuery,
+  LoginInput,
+  RegisterInput,
+} from "./schemas"

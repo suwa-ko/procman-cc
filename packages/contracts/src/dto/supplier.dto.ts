@@ -1,18 +1,25 @@
-import type { PaginationParams } from "@ps/types-base"
+import type { SupplierEntity } from "@ps/model"
+import type { PaginatedResponse } from "@ps/types-base"
 
-import type { SupplierStatus } from "../enums/supplier-status"
-import type { SupplierDTO } from "../schemas/supplier"
 
-/** 供应商列表查询参数 */
-export interface SupplierQueryParams extends PaginationParams {
-  keyword?: string
-  status?: SupplierStatus
+/** 供应商 DTO（含系统字段 id / code / createdAt / updatedAt） */
+export type SupplierDTO = SupplierEntity & {
+  id: string
+  code: string
+  createdAt: string
+  updatedAt: string
 }
 
-/** 供应商列表响应 */
-export interface SupplierListResponse {
-  data: SupplierDTO[]
-  total: number
+export type CreateSupplierRequest = SupplierEntity
+export type UpdateSupplierRequest = Partial<SupplierEntity>
+
+/** 供应商列表查询参数 */
+export interface SupplierQueryParams {
+  keyword?: string
+  status?: SupplierEntity["status"]
   page: number
   pageSize: number
 }
+
+/** 供应商列表响应 */
+export type SupplierListResponse = PaginatedResponse<SupplierDTO>

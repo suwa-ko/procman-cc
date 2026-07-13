@@ -24,5 +24,12 @@ module.exports = {
         ],
       },
     ],
+    // msw/vitest 是开发/测试运行时依赖，允许从 devDependencies 导入
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        devDependencies: ["**/*.test.ts", "**/*.test.tsx", "**/mocks/**"],
+      },
+    ],
   },
 }

@@ -17,6 +17,7 @@
     "@ps/env-config": "workspace:*",
     "@ps/log": "workspace:*",
     "@ps/mock": "workspace:*",
+    "@ps/model-core": "workspace:*",
     "@ps/types-base": "workspace:*",
     "@ps/web-kit": "workspace:*",
     "react": "catalog:",
@@ -31,6 +32,7 @@
     "eslint": "catalog:",
     "eslint-config-prettier": "catalog:",
     "eslint-plugin-import": "catalog:",
+    "msw": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:"

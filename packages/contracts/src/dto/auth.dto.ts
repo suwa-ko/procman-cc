@@ -1,8 +1,12 @@
+import type { LoginInput, RegisterInput } from "@ps/model"
+
+export type { LoginInput, RegisterInput }
+
 /** 登录请求 */
-export interface LoginRequest {
-  username: string
-  password: string
-}
+export type LoginRequest = LoginInput
+
+/** 注册请求 */
+export type RegisterRequest = RegisterInput
 
 /** 登录响应 */
 export interface LoginResponse {
@@ -11,11 +15,4 @@ export interface LoginResponse {
     id: string
     name: string
   }
-}
-
-/** 注册请求 */
-export interface RegisterRequest {
-  username: string
-  password: string
-  personId: string
 }
