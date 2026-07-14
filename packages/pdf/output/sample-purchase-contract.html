@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contract PDF</title>
+  <style>
+    /* ===== 页面设置 ===== */
+    @page {
+      size: A4;
+      margin: 25mm 20mm 30mm 20mm;
+      @bottom-center {
+        content: "第 " counter(page) " 页，共 " counter(pages) " 页";
+        font-family: "SimSun", "宋体", serif;
+        font-size: 9pt;
+        color: #666;
+      }
+    }
+
+    /* ===== 全局 ===== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "SimSun", "宋体", "STSong", "Noto Serif CJK SC", serif;
+      font-size: 12pt;
+      line-height: 2;
+      color: #1a1a1a;
+      position: relative;
+    }
+
+    /* ===== 标题层级 ===== */
+    h1 {
+      font-family: "SimHei", "黑体", "STHeiti", "Noto Sans CJK SC", sans-serif;
+      font-size: 18pt;
+      text-align: center;
+      margin: 30px 0 24px;
+      font-weight: bold;
+      letter-spacing: 4px;
+    }
+
+    h2 {
+      font-family: "SimHei", "黑体", "STHeiti", "Noto Sans CJK SC", sans-serif;
+      font-size: 14pt;
+      margin: 20px 0 12px;
+      font-weight: bold;
+    }
+
+    h3 {
+      font-family: "SimHei", "黑体", "STHeiti", "Noto Sans CJK SC", sans-serif;
+      font-size: 12pt;
+      margin: 14px 0 8px;
+      font-weight: bold;
+    }
+
+    /* ===== 正文段落 ===== */
+    p {
+      text-indent: 2em;
+      margin: 4px 0;
+    }
+
+    p.no-indent { text-indent: 0; }
+
+    /* ===== 合同编号条 ===== */
+    .contract-no-line {
+      text-align: right;
+      font-size: 10.5pt;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #333;
+    }
+    .contract-no-line .label { font-weight: bold; }
+    .contract-no-line .value { margin-left: 8px; }
+
+    /* ===== 签约概要 ===== */
+    .signing-info {
+      margin: 20px 0 30px;
+      font-size: 10.5pt;
+      text-align: right;
+      color: #555;
+    }
+    .signing-info span { margin-left: 24px; }
+
+    /* ===== 前言 ===== */
+    .preamble {
+      margin: 16px 0 24px;
+    }
+    .preamble p { text-indent: 2em; }
+
+    /* ===== 当事人信息表 ===== */
+    .party-info-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px;
+      font-size: 11pt;
+    }
+    .party-info-table td {
+      padding: 6px 8px;
+      vertical-align: top;
+      border: none;
+    }
+    .party-info-table .label-col {
+      width: 100px;
+      font-weight: bold;
+      white-space: nowrap;
+      text-align: right;
+      padding-right: 4px;
+    }
+    .party-info-table .value-col {
+      text-indent: 0;
+    }
+    .party-info-table .value-col p { text-indent: 0; margin: 0; }
+    .party-info-table .party-sep {
+      border-top: 1px dashed #ccc;
+    }
+    .party-info-table .party-sep td {
+      padding-top: 12px;
+    }
+
+    /* ===== 采购明细表格 ===== */
+    table.purchase-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px;
+      font-size: 10.5pt;
+    }
+    table.purchase-table th,
+    table.purchase-table td {
+      border: 1px solid #555;
+      padding: 7px 8px;
+      text-align: center;
+      vertical-align: middle;
+    }
+    table.purchase-table th {
+      background-color: #e8e8e8;
+      font-weight: bold;
+      font-family: "SimHei", "黑体", "STHeiti", sans-serif;
+      font-size: 10.5pt;
+    }
+    table.purchase-table td {
+      font-size: 10.5pt;
+    }
+    table.purchase-table .col-seq { width: 50px; }
+    table.purchase-table .col-name { text-align: left; }
+    table.purchase-table .col-spec { text-align: left; }
+    table.purchase-table .col-price { text-align: right; }
+    table.purchase-table .col-qty { text-align: right; }
+    table.purchase-table .col-unit { width: 70px; }
+    table.purchase-table .col-total { text-align: right; }
+    table.purchase-table tr:nth-child(even) td {
+      background-color: #fafafa;
+    }
+    table.purchase-table .total-row td {
+      font-weight: bold;
+      background-color: #f0f0f0;
+      font-size: 11pt;
+    }
+
+    /* ===== 条款样式 ===== */
+    .clause {
+      margin: 8px 0;
+      padding-left: 0;
+    }
+    .clause p { text-indent: 2em; margin: 4px 0; }
+    .clause-title {
+      font-weight: bold;
+      font-family: "SimHei", "黑体", "STHeiti", sans-serif;
+    }
+
+    /* ===== 签署区 ===== */
+    .signature {
+      margin-top: 50px;
+      page-break-inside: avoid;
+    }
+    .signature-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11pt;
+    }
+    .signature-table td {
+      width: 50%;
+      padding: 10px 20px;
+      vertical-align: top;
+    }
+    .signature-table .sig-party {
+      font-weight: bold;
+      font-family: "SimHei", "黑体", "STHeiti", sans-serif;
+      font-size: 12pt;
+      margin-bottom: 16px;
+      text-indent: 0;
+    }
+    .signature-table .sig-line {
+      margin: 12px 0;
+      text-indent: 0;
+    }
+    .signature-table .sig-seal {
+      margin-top: 30px;
+      text-indent: 0;
+      color: #888;
+      font-size: 10pt;
+    }
+
+    /* ===== 末尾条款编号 ===== */
+    .clause-num {
+      font-weight: bold;
+      font-family: "SimHei", "黑体", "STHeiti", sans-serif;
+    }
+
+    /* ===== 水印 ===== */
+    body::after {
+      content: "样本";
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-30deg);
+      font-family: "SimHei", "黑体", "STHeiti", sans-serif;
+      font-size: 72pt;
+      color: rgba(0, 0, 0, 0.04);
+      pointer-events: none;
+      white-space: nowrap;
+      z-index: 1000;
+    }
+
+    /* ===== 辅助 ===== */
+    .text-right { text-align: right; }
+    .text-center { text-align: center; }
+    .mt-8 { margin-top: 8px; }
+    .mt-16 { margin-top: 16px; }
+    .mt-24 { margin-top: 24px; }
+    .mb-16 { margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+<!-- 合同编号 -->
+<div class="contract-no-line">
+  <span class="label">合同编号：</span><span class="value">CTT-2026-0001</span>
+</div>
+
+<!-- 标题 -->
+<h1>多物品采购合同</h1>
+
+<!-- 签约概要 -->
+<div class="signing-info">
+  <span>签订日期：2026-07-14</span>
+  <span>签订地点：四川省成都市</span>
+</div>
+
+<!-- 前言 -->
+<div class="preamble">
+  <p>
+    本合同由以下双方经友好协商，依据《中华人民共和国民法典》及相关法律法规，就甲方向乙方采购物品事宜达成一致，以资共同信守。
+  </p>
+</div>
+
+<!-- 当事人信息 -->
+<table class="party-info-table">
+  <tr>
+    <td class="label-col">甲方（采购方）</td>
+    <td class="value-col"><p>成都计算机零部件制造有限公司</p></td>
+  </tr>
+  <tr>
+    <td class="label-col">法定代表人</td>
+    <td class="value-col"><p>张三</p></td>
+  </tr>
+  <tr>
+    <td class="label-col">地址</td>
+    <td class="value-col"><p>四川省成都市高新区天府大道XX号</p></td>
+  </tr>
+  <tr>
+    <td class="label-col">联系人</td>
+    <td class="value-col"><p>（甲方联系人）</p></td>
+  </tr>
+  <tr class="party-sep">
+    <td class="label-col">乙方（供应方）</td>
+    <td class="value-col"><p>深圳电子元器件供应有限公司</p></td>
+  </tr>
+  <tr>
+    <td class="label-col">联系人</td>
+    <td class="value-col"><p>李四 / 13900000001</p></td>
+  </tr>
+  <tr>
+    <td class="label-col">联系电话</td>
+    <td class="value-col"><p>（联系电话）</p></td>
+  </tr>
+  <tr>
+    <td class="label-col">开户银行</td>
+    <td class="value-col"><p>（开户银行）</p></td>
+  </tr>
+  <tr>
+    <td class="label-col">银行账号</td>
+    <td class="value-col"><p>（银行账号）</p></td>
+  </tr>
+</table>
+
+<!-- 第一条：采购标的 -->
+<div class="section">
+  <h2>第一条&emsp;采购标的</h2>
+  <p>甲方向乙方采购以下物品，具体明细如下表：</p>
+
+  <table class="purchase-table">
+    <thead>
+      <tr>
+        <th class="col-seq">序号</th>
+        <th class="col-name">物品名称</th>
+        <th class="col-spec">规格型号</th>
+        <th class="col-price">单价（元）</th>
+        <th class="col-qty">数量</th>
+        <th class="col-unit">单位</th>
+        <th class="col-total">总价（元）</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="col-seq">1</td>
+        <td class="col-name">Practical Concrete Soap</td>
+        <td class="col-spec">Silk</td>
+        <td class="col-price">¥3172.70</td>
+        <td class="col-qty">969</td>
+        <td class="col-unit">m</td>
+        <td class="col-total">¥3074346.30</td>
+      </tr>
+      <tr>
+        <td class="col-seq">2</td>
+        <td class="col-name">Sleek Metal Soap</td>
+        <td class="col-spec">Wooden</td>
+        <td class="col-price">¥800.93</td>
+        <td class="col-qty">276</td>
+        <td class="col-unit">件</td>
+        <td class="col-total">¥221056.68</td>
+      </tr>
+      <tr>
+        <td class="col-seq">3</td>
+        <td class="col-name">Gorgeous Marble Shirt</td>
+        <td class="col-spec">Ceramic</td>
+        <td class="col-price">¥5172.54</td>
+        <td class="col-qty">679</td>
+        <td class="col-unit">台</td>
+        <td class="col-total">¥3512154.66</td>
+      </tr>
+      <tr>
+        <td class="col-seq">4</td>
+        <td class="col-name">Elegant Bronze Bacon</td>
+        <td class="col-spec">Wooden</td>
+        <td class="col-price">¥8297.78</td>
+        <td class="col-qty">37</td>
+        <td class="col-unit">个</td>
+        <td class="col-total">¥307017.86</td>
+      </tr>
+      <tr>
+        <td class="col-seq">5</td>
+        <td class="col-name">Sleek Aluminum Shirt</td>
+        <td class="col-spec">Rubber</td>
+        <td class="col-price">¥2569.15</td>
+        <td class="col-qty">839</td>
+        <td class="col-unit">个</td>
+        <td class="col-total">¥2155516.85</td>
+      </tr>
+      <tr class="total-row">
+        <td colspan="6" class="text-right"><strong>合计总金额（人民币元）</strong></td>
+        <td class="col-total">¥456000.00</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    以上合计总金额为人民币 <strong>¥456000.00</strong> 元。
+  </p>
+</div>
+
+<!-- 第二条：质量标准 -->
+<div class="section">
+  <h2>第二条&emsp;质量标准</h2>
+  <p>
+    乙方所提供的产品必须符合国家相关质量标准及双方确认的技术规格书。
+  </p>
+</div>
+
+<!-- 第三条：交付与运输 -->
+<div class="section">
+  <h2>第三条&emsp;交付与运输</h2>
+  <p>
+    <span class="clause-num">3.1 </span>交付时间：乙方应在合同生效后30个自然日内完成全部交货。
+  </p>
+  <p>
+    <span class="clause-num">3.2 </span>交付地点：甲方指定仓库：四川省成都市高新区XX路XX号。
+  </p>
+  <p>
+    <span class="clause-num">3.3 </span>运输方式及费用承担：由乙方负责运输至交付地点，运输费用由乙方承担。
+  </p>
+</div>
+
+<!-- 第四条：验收 -->
+<div class="section">
+  <h2>第四条&emsp;验收</h2>
+  <p>
+    甲方在收到货物后15个工作日内完成验收，验收合格后出具验收单。
+  </p>
+</div>
+
+<!-- 第五条：付款方式 -->
+<div class="section">
+  <h2>第五条&emsp;付款方式</h2>
+  <p>
+    货到验收合格后60日内，甲方向乙方一次性支付合同总金额。
+  </p>
+</div>
+
+<!-- 第六条：违约责任 -->
+<div class="section">
+  <h2>第六条&emsp;违约责任</h2>
+  <p>
+    逾期交货每日按未交付产品总金额的0.5%支付违约金，累计违约金不超过合同总金额的10%。
+  </p>
+</div>
+
+<!-- 补充条款 -->
+<div class="section">
+  <h2>第七条&emsp;补充条款</h2>
+  <p>乙方应免费提供一年的售后技术支持和质量保证服务。</p>
+</div>
+
+<!-- 合同期限 -->
+<div class="section">
+  <h2>第八条&emsp;合同期限</h2>
+  <p>
+    本合同有效期自 <strong>2026-07-14</strong> 起至
+    <strong>2027-07-13</strong> 止。
+    合同期满后，双方可协商续签。
+  </p>
+</div>
+
+<!-- 争议解决 -->
+<div class="section">
+  <h2>第九条&emsp;争议解决</h2>
+  <p>
+    因本合同引起的争议，双方应友好协商解决；协商不成的，提交甲方所在地有管辖权的人民法院裁决。
+  </p>
+</div>
+
+<!-- 其他 -->
+<div class="section">
+  <h2>第十条&emsp;其他约定</h2>
+  <p>本合同一式贰份，甲乙双方各执壹份，具有同等法律效力。</p>
+  <p>本合同自双方签字盖章之日起生效。</p>
+  <p>本合同未尽事宜，由双方协商后签订书面补充协议，补充协议与本合同具有同等法律效力。</p>
+</div>
+
+<!-- 签署区 -->
+<div class="signature">
+  <table class="signature-table">
+    <tr>
+      <td>
+        <p class="sig-party">甲方（盖章）</p>
+        <p class="sig-line">成都计算机零部件制造有限公司</p>
+        <p class="sig-line">法定代表人/授权代表（签字）：</p>
+        <p class="sig-line">日期：&emsp;&emsp;年&emsp;&emsp;月&emsp;&emsp;日</p>
+      </td>
+      <td>
+        <p class="sig-party">乙方（盖章）</p>
+        <p class="sig-line">深圳电子元器件供应有限公司</p>
+        <p class="sig-line">法定代表人/授权代表（签字）：</p>
+        <p class="sig-line">日期：&emsp;&emsp;年&emsp;&emsp;月&emsp;&emsp;日</p>
+      </td>
+    </tr>
+  </table>
+</div>
+
+</body>
+</html>

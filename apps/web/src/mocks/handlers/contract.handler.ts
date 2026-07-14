@@ -129,6 +129,44 @@ export function createContractHandlers(store: ContractStore): HttpHandler[] {
       return ok(updated)
     }),
 
+    /** GET /api/contracts/:id/pdf — 导出合同 PDF（mock 返回简单文本） */
+    http.get(`${base}/:id/pdf`, ({ params }) => {
+      const id = params.id as string
+      if (!id) {
+        return fail(ResponseCode.NotFound, "缺少 ID")
+      }
+      const contract = store.getById(id)
+      if (!contract) {
+        return fail(ResponseCode.NotFound, "合同不存在")
+      }
+      const entries = store.getEntries(id)
+      const lines = [
+        "合同编号: " + contract.code,
+        "合同名称: " + contract.name,
+        "",
+      ].concat(
+        entries.map(
+          (e, i) =>
+            (i + 1).toString() + ". " + e.materialName + " | " +
+            (e.spec ?? "-") + " | " +
+            e.unitPrice.toString() + "元 × " +
+            e.quantity.toString() + e.unit + " = " +
+            e.totalPrice.toString() + "元"
+        )
+      ).concat([
+        "",
+        "合计: " + (contract.totalAmount ?? 0).toString() + "元",
+      ])
+      const text = lines.join("\n")
+      return new Response(text, {
+        headers: {
+          "Content-Type": "application/pdf",
+          "Content-Disposition":
+            'attachment; filename="contract-' + contract.code + '.pdf"',
+        },
+      })
+    }),
+
     /** DELETE /api/contracts/:id — 仅 Draft 可删除 */
     http.delete(`${base}/:id`, ({ params }) => {
       const id = params.id as string

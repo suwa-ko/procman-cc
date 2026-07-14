@@ -18,9 +18,11 @@
     "@ps/db": "workspace:*",
     "@ps/env-config": "workspace:*",
     "@ps/log": "workspace:*",
+    "@ps/pdf": "workspace:*",
     "@ps/types-base": "workspace:*",
     "@ps/utils": "workspace:*",
-    "hono": "catalog:"
+    "hono": "catalog:",
+    "zod": "catalog:"
   },
   "devDependencies": {
     "@types/node": "catalog:",

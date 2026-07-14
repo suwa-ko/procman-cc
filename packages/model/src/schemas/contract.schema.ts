@@ -46,6 +46,9 @@ export const contractSchema = z.object({
   expirationDate: z.string().optional(),
   status: z.nativeEnum(ContractStatus).default(ContractStatus.Draft),
   companyName: z.string().optional(),
+  signDate: z.string().optional(),
+  signedFilePath: z.string().optional(),
+  remark: z.string().optional(),
 })
 
 /** 合同创建校验（status 由系统默认 Draft） */

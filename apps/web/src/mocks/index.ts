@@ -46,4 +46,3 @@ export { seedMockData }
 export type { AllMockStores }
 export { createAllHandlers } from "./handlers"
 export { startMockBrowser } from "./browser"
-export { createMockServer } from "./server"

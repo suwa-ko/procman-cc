@@ -19,7 +19,7 @@ import ReactDOM from "react-dom/client"
 import { App } from "./App"
 
 // ---------- 1. 加载环境配置 ----------
-const config = loadConfig()
+const config = loadConfig({ env: "mock" })
 
 // ---------- 2. 初始化日志 ----------
 const logger = createLogger({

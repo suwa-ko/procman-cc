@@ -1,0 +1,204 @@
+<!-- 合同编号 -->
+<div class="contract-no-line">
+  <span class="label">合同编号：</span><span class="value">{{contract.code}}</span>
+</div>
+
+<!-- 标题 -->
+<h1>多物品采购合同</h1>
+
+<!-- 签约概要 -->
+<div class="signing-info">
+  <span>签订日期：{{date contract.effectiveDate}}</span>
+  <span>签订地点：{{default contract.content.signingPlace "四川省成都市"}}</span>
+</div>
+
+<!-- 前言 -->
+<div class="preamble">
+  <p>
+    本合同由以下双方经友好协商，依据《中华人民共和国民法典》及相关法律法规，就甲方向乙方采购物品事宜达成一致，以资共同信守。
+  </p>
+</div>
+
+<!-- 当事人信息 -->
+<table class="party-info-table">
+  <tr>
+    <td class="label-col">甲方（采购方）</td>
+    <td class="value-col"><p>{{default contract.companyName "（采购方名称）"}}</p></td>
+  </tr>
+  <tr>
+    <td class="label-col">法定代表人</td>
+    <td class="value-col"><p>{{default contract.handlerName "（法定代表人）"}}</p></td>
+  </tr>
+  <tr>
+    <td class="label-col">地址</td>
+    <td class="value-col"><p>{{default contract.content.companyAddress "（采购方地址）"}}</p></td>
+  </tr>
+  <tr>
+    <td class="label-col">联系人</td>
+    <td class="value-col"><p>{{default contract.content.companyContact "（甲方联系人）"}}</p></td>
+  </tr>
+  <tr class="party-sep">
+    <td class="label-col">乙方（供应方）</td>
+    <td class="value-col"><p>{{default contract.content.supplierName "（供应方名称）"}}</p></td>
+  </tr>
+  <tr>
+    <td class="label-col">联系人</td>
+    <td class="value-col"><p>{{default contract.content.supplierContact "（联系人）"}}</p></td>
+  </tr>
+  <tr>
+    <td class="label-col">联系电话</td>
+    <td class="value-col"><p>{{default contract.content.supplierPhone "（联系电话）"}}</p></td>
+  </tr>
+  <tr>
+    <td class="label-col">开户银行</td>
+    <td class="value-col"><p>{{default contract.content.supplierBank "（开户银行）"}}</p></td>
+  </tr>
+  <tr>
+    <td class="label-col">银行账号</td>
+    <td class="value-col"><p>{{default contract.content.supplierAccount "（银行账号）"}}</p></td>
+  </tr>
+</table>
+
+<!-- 第一条：采购标的 -->
+<div class="section">
+  <h2>第一条&emsp;采购标的</h2>
+  <p>甲方向乙方采购以下物品，具体明细如下表：</p>
+
+  <table class="purchase-table">
+    <thead>
+      <tr>
+        <th class="col-seq">序号</th>
+        <th class="col-name">物品名称</th>
+        <th class="col-spec">规格型号</th>
+        <th class="col-price">单价（元）</th>
+        <th class="col-qty">数量</th>
+        <th class="col-unit">单位</th>
+        <th class="col-total">总价（元）</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each contract.entries}}
+      <tr>
+        <td class="col-seq">{{inc @index}}</td>
+        <td class="col-name">{{materialName}}</td>
+        <td class="col-spec">{{default spec "-"}}</td>
+        <td class="col-price">{{currency unitPrice}}</td>
+        <td class="col-qty">{{quantity}}</td>
+        <td class="col-unit">{{unit}}</td>
+        <td class="col-total">{{currency totalPrice}}</td>
+      </tr>
+      {{/each}}
+      <tr class="total-row">
+        <td colspan="6" class="text-right"><strong>合计总金额（人民币元）</strong></td>
+        <td class="col-total">{{currency contract.totalAmount}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    以上合计总金额为人民币 <strong>{{currency contract.totalAmount}}</strong> 元。
+    {{#if contract.content.amountInWords}}
+    大写：{{contract.content.amountInWords}}。
+    {{/if}}
+  </p>
+</div>
+
+<!-- 第二条：质量标准 -->
+<div class="section">
+  <h2>第二条&emsp;质量标准</h2>
+  <p>
+    {{default contract.content.qualityClause "乙方所提供的物品应符合国家相关质量标准、行业标准及双方确认的技术规格要求。乙方应保证所提供的物品为全新、合格的原材料或产品，不存在任何质量瑕疵。"}}
+  </p>
+</div>
+
+<!-- 第三条：交付与运输 -->
+<div class="section">
+  <h2>第三条&emsp;交付与运输</h2>
+  <p>
+    <span class="clause-num">3.1 </span>交付时间：{{default contract.content.deliveryClause "乙方应在合同生效后按双方约定时间完成交付。"}}
+  </p>
+  <p>
+    <span class="clause-num">3.2 </span>交付地点：{{default contract.content.deliveryLocation "甲方指定地点。"}}
+  </p>
+  <p>
+    <span class="clause-num">3.3 </span>运输方式及费用承担：{{default contract.content.transportClause "由乙方负责运输至交付地点，运输费用由乙方承担。"}}
+  </p>
+</div>
+
+<!-- 第四条：验收 -->
+<div class="section">
+  <h2>第四条&emsp;验收</h2>
+  <p>
+    {{default contract.content.acceptanceClause "甲方应在收到货物后于合理期限内按照本合同约定的质量标准进行验收。验收合格后，甲方出具验收合格确认书；验收不合格的，甲方有权要求乙方在指定期限内更换或退货，由此产生的费用由乙方承担。"}}
+  </p>
+</div>
+
+<!-- 第五条：付款方式 -->
+<div class="section">
+  <h2>第五条&emsp;付款方式</h2>
+  <p>
+    {{default contract.content.paymentClause "双方协商确定付款方式及期限。"}}
+  </p>
+</div>
+
+<!-- 第六条：违约责任 -->
+<div class="section">
+  <h2>第六条&emsp;违约责任</h2>
+  <p>
+    {{default contract.content.liabilityClause "若一方违反本合同约定，应承担相应的违约责任并赔偿对方因此遭受的损失。"}}
+  </p>
+</div>
+
+<!-- 补充条款 -->
+{{#if contract.content.additionalClause}}
+<div class="section">
+  <h2>第七条&emsp;补充条款</h2>
+  <p>{{contract.content.additionalClause}}</p>
+</div>
+{{/if}}
+
+<!-- 合同期限 -->
+<div class="section">
+  <h2>第{{#if contract.content.additionalClause}}八{{else}}七{{/if}}条&emsp;合同期限</h2>
+  <p>
+    本合同有效期自 <strong>{{date contract.effectiveDate}}</strong> 起至
+    <strong>{{date contract.expirationDate}}</strong> 止。
+    合同期满后，双方可协商续签。
+  </p>
+</div>
+
+<!-- 争议解决 -->
+<div class="section">
+  <h2>第{{#if contract.content.additionalClause}}九{{else}}八{{/if}}条&emsp;争议解决</h2>
+  <p>
+    {{default contract.content.disputeClause "因本合同引起的或与本合同有关的任何争议，双方应首先通过友好协商解决；协商不成的，任何一方均有权向甲方所在地有管辖权的人民法院提起诉讼。"}}
+  </p>
+</div>
+
+<!-- 其他 -->
+<div class="section">
+  <h2>第{{#if contract.content.additionalClause}}十{{else}}九{{/if}}条&emsp;其他约定</h2>
+  <p>本合同一式贰份，甲乙双方各执壹份，具有同等法律效力。</p>
+  <p>本合同自双方签字盖章之日起生效。</p>
+  <p>本合同未尽事宜，由双方协商后签订书面补充协议，补充协议与本合同具有同等法律效力。</p>
+</div>
+
+<!-- 签署区 -->
+<div class="signature">
+  <table class="signature-table">
+    <tr>
+      <td>
+        <p class="sig-party">甲方（盖章）</p>
+        <p class="sig-line">{{default contract.companyName "采购方"}}</p>
+        <p class="sig-line">法定代表人/授权代表（签字）：</p>
+        <p class="sig-line">日期：&emsp;&emsp;年&emsp;&emsp;月&emsp;&emsp;日</p>
+      </td>
+      <td>
+        <p class="sig-party">乙方（盖章）</p>
+        <p class="sig-line">{{default contract.content.supplierName "供应方"}}</p>
+        <p class="sig-line">法定代表人/授权代表（签字）：</p>
+        <p class="sig-line">日期：&emsp;&emsp;年&emsp;&emsp;月&emsp;&emsp;日</p>
+      </td>
+    </tr>
+  </table>
+</div>

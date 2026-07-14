@@ -1,0 +1,147 @@
+<!-- 合同编号 -->
+<div class="contract-no-line">
+  <span class="label">合同编号：</span><span class="value">{{contract.code}}</span>
+</div>
+
+<!-- 标题 -->
+<h1>保密协议</h1>
+
+<!-- 签约概要 -->
+<div class="signing-info">
+  <span>签订日期：{{date contract.effectiveDate}}</span>
+  <span>签订地点：{{default contract.content.signingPlace "四川省成都市"}}</span>
+</div>
+
+<!-- 前言 -->
+<div class="preamble">
+  <p>
+    本保密协议（以下简称"本协议"）由以下双方经协商一致，依据《中华人民共和国民法典》《中华人民共和国反不正当竞争法》等相关法律法规，就保密信息保护事宜达成如下协议，以资共同遵守。
+  </p>
+</div>
+
+<!-- 当事人信息 -->
+<table class="party-info-table">
+  <tr>
+    <td class="label-col">甲方（披露方）</td>
+    <td class="value-col"><p>{{default contract.companyName "（甲方公司名称）"}}</p></td>
+  </tr>
+  <tr>
+    <td class="label-col">法定代表人</td>
+    <td class="value-col"><p>{{default contract.handlerName "（法定代表人）"}}</p></td>
+  </tr>
+  <tr>
+    <td class="label-col">地址</td>
+    <td class="value-col"><p>{{default contract.content.companyAddress "（甲方地址）"}}</p></td>
+  </tr>
+  <tr>
+    <td class="label-col">联系人</td>
+    <td class="value-col"><p>{{default contract.content.companyContact "（甲方联系人）"}}</p></td>
+  </tr>
+  <tr class="party-sep">
+    <td class="label-col">乙方（接收方）</td>
+    <td class="value-col"><p>{{default contract.content.supplierName "（乙方名称）"}}</p></td>
+  </tr>
+  <tr>
+    <td class="label-col">联系人</td>
+    <td class="value-col"><p>{{default contract.content.supplierContact "（乙方联系人）"}}</p></td>
+  </tr>
+  <tr>
+    <td class="label-col">联系电话</td>
+    <td class="value-col"><p>{{default contract.content.supplierPhone "（联系电话）"}}</p></td>
+  </tr>
+</table>
+
+<!-- 第一条：保密信息定义 -->
+<div class="section">
+  <h2>第一条&emsp;保密信息定义</h2>
+  <p>
+    1.1 本协议所称"保密信息"是指一方向另一方披露的、与本协议目的相关的所有信息，无论以口头、书面、电子或其他任何形式存在，也无论是否明确标记为"机密"或"保密"。
+  </p>
+  <p>
+    1.2 保密信息包括但不限于：技术资料、技术诀窍、设计方案、产品规格、源代码、商业计划、客户信息、供应商信息、财务数据、市场营销策略、定价信息、合同条款、人员信息以及双方在合作过程中获知的其他非公开信息。
+  </p>
+</div>
+
+<!-- 第二条：保密义务 -->
+<div class="section">
+  <h2>第二条&emsp;保密义务</h2>
+  <p>
+    2.1 接收方同意对披露方的保密信息予以严格保密。未经披露方事先书面同意，接收方不得向任何第三方披露、泄露或公开保密信息的全部或部分内容。
+  </p>
+  <p>
+    2.2 接收方仅可为履行本协议目的之需要，向有必要知悉保密信息的本方员工、顾问或关联方披露保密信息，且应确保前述人员知悉并遵守本协议项下的保密义务。
+  </p>
+  <p>
+    2.3 接收方应采取不低于保护自身同类保密信息的合理谨慎程度，保护披露方的保密信息免遭未经授权的使用或披露。
+  </p>
+</div>
+
+<!-- 第三条：保密期限 -->
+<div class="section">
+  <h2>第三条&emsp;保密期限</h2>
+  <p>
+    本协议项下的保密义务自本协议签署之日起生效。除保密信息依法进入公有领域外，本协议终止或双方合作结束后，接收方的保密义务仍持续有效。
+  </p>
+</div>
+
+<!-- 第四条：例外情形 -->
+<div class="section">
+  <h2>第四条&emsp;例外情形</h2>
+  <p>
+    本协议项下的保密义务不适用于以下情形：
+  </p>
+  <p>4.1 在披露时已经为公众所知悉的信息；</p>
+  <p>4.2 非因接收方的过错而进入公有领域的信息；</p>
+  <p>4.3 接收方能够证明在披露前已合法持有的信息；</p>
+  <p>4.4 接收方从有权披露的第三方合法获取的信息。</p>
+</div>
+
+<!-- 第五条：违约责任 -->
+<div class="section">
+  <h2>第五条&emsp;违约责任</h2>
+  <p>
+    {{default contract.content.liabilityClause "若接收方违反本协议约定的保密义务，应赔偿披露方因此遭受的全部直接及间接损失，并承担披露方为维权而支出的全部合理费用（包括但不限于律师费、诉讼费、保全费等）。"}}
+  </p>
+</div>
+
+<!-- 第六条：适用法律与争议解决 -->
+<div class="section">
+  <h2>第六条&emsp;适用法律与争议解决</h2>
+  <p>
+    {{default contract.content.governingLaw "本协议的订立、效力、解释、履行及争议解决均适用中华人民共和国法律。因本协议引起的或与本协议有关的任何争议，双方应首先通过友好协商解决；协商不成的，任何一方均有权向甲方所在地有管辖权的人民法院提起诉讼。"}}
+  </p>
+</div>
+
+{{#if contract.content.additionalClause}}
+<div class="section">
+  <h2>第七条&emsp;补充条款</h2>
+  <p>{{contract.content.additionalClause}}</p>
+</div>
+{{/if}}
+
+<!-- 其他约定 -->
+<div class="section">
+  <h2>第{{#if contract.content.additionalClause}}八{{else}}七{{/if}}条&emsp;其他约定</h2>
+  <p>本协议一式贰份，甲乙双方各执壹份，具有同等法律效力。</p>
+  <p>本协议自双方签字盖章之日起生效。</p>
+</div>
+
+<!-- 签署区 -->
+<div class="signature">
+  <table class="signature-table">
+    <tr>
+      <td>
+        <p class="sig-party">甲方（盖章）</p>
+        <p class="sig-line">{{default contract.companyName "披露方"}}</p>
+        <p class="sig-line">法定代表人/授权代表（签字）：</p>
+        <p class="sig-line">日期：&emsp;&emsp;年&emsp;&emsp;月&emsp;&emsp;日</p>
+      </td>
+      <td>
+        <p class="sig-party">乙方（盖章）</p>
+        <p class="sig-line">{{default contract.content.supplierName "接收方"}}</p>
+        <p class="sig-line">法定代表人/授权代表（签字）：</p>
+        <p class="sig-line">日期：&emsp;&emsp;年&emsp;&emsp;月&emsp;&emsp;日</p>
+      </td>
+    </tr>
+  </table>
+</div>

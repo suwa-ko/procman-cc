@@ -13,15 +13,23 @@
     "lint": "eslint src --ext .ts,.tsx"
   },
   "dependencies": {
+    "@ps/antd-kit": "workspace:*",
     "@ps/contracts": "workspace:*",
     "@ps/env-config": "workspace:*",
+    "@ps/hooks-business": "workspace:*",
+    "@ps/hooks-core": "workspace:*",
     "@ps/log": "workspace:*",
     "@ps/mock": "workspace:*",
     "@ps/model-core": "workspace:*",
     "@ps/types-base": "workspace:*",
     "@ps/web-kit": "workspace:*",
+    "antd": "catalog:",
+    "@ant-design/icons": "catalog:",
+    "@tanstack/react-query": "catalog:",
+    "dayjs": "^1.11.0",
     "react": "catalog:",
-    "react-dom": "catalog:"
+    "react-dom": "catalog:",
+    "react-router-dom": "catalog:"
   },
   "devDependencies": {
     "@types/react": "catalog:",
@@ -36,5 +44,10 @@
     "typescript": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

@@ -233,8 +233,8 @@ module.exports = {
     "no-empty-pattern": "error",
     // 禁止不必要的布尔类型转换
     "no-extra-boolean-cast": "error",
-    // 禁止不必要的括号
-    "no-extra-parens": ["error", "all"],
+    // 禁止不必要的括号（多行 JSX 包裹括号是标准模式，允许）
+    "no-extra-parens": ["error", "all", { ignoreJSX: "multi-line" }],
     // 禁止不必要的分号
     "no-extra-semi": "error",
     // 禁止浮点小数前后缺失数字（如 .5 或 5.）

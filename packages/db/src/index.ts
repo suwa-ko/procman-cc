@@ -14,6 +14,28 @@ export {
   applySorts,
   paginationToRange,
 } from "./core/query-builder"
+
+// ---- 实体仓储 ----
+export { CodeSequenceRepo } from "./code-sequence.repo"
+export { PricingRepo } from "./pricing.repo"
+export { ContractRepo } from "./contract.repo"
+export { ContractEntryRepo } from "./contract-entry.repo"
+export { SupplierRepo } from "./supplier.repo"
+export { MaterialRepo } from "./material.repo"
+export { CategoryRepo } from "./category.repo"
+export { TemplateRepo } from "./template.repo"
+export { PersonRepo } from "./person.repo"
+
+export type { PricingRow } from "./pricing.repo"
+export type { ContractRow } from "./contract.repo"
+export type { ContractEntryRow } from "./contract-entry.repo"
+export type { SupplierRow } from "./supplier.repo"
+export type { MaterialRow } from "./material.repo"
+export type { CategoryRow } from "./category.repo"
+export type { TemplateRow } from "./template.repo"
+export type { PersonRow } from "./person.repo"
+
+// ---- 核心类型 ----
 export type {
   BaseEntity,
   DbClient,

@@ -8,6 +8,9 @@ import { z } from "zod"
  */
 export const personSchema = z.object({
   name: z.string().min(1, "人员姓名不可为空"),
+  email: z.string().email("邮箱格式不正确").optional().or(z.literal("")),
+  department: z.string().optional(),
+  title: z.string().optional(),
 })
 
 /** 人员列表查询参数（通常从外部系统同步查询） */
