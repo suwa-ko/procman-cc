@@ -6,7 +6,7 @@
  * 校验失败返回 401。
  */
 
-import type { Context, Next } from "hono"
+import type { MiddlewareHandler } from "hono"
 
 import type { AppDependencies } from "../types"
 
@@ -15,16 +15,12 @@ import type { AppDependencies } from "../types"
  * 通过闭包注入 deps，避免全局状态。
  */
 export function createAuthMiddleware(deps: AppDependencies) {
-  return async function authMiddleware(
-    c: Context,
-    next: Next
-  ): Promise<void> {
+  const handler: MiddlewareHandler = async (c, next) => {
     const authHeader = c.req.header("Authorization")
 
     if (!authHeader?.startsWith("Bearer ")) {
       c.status(401)
-      c.json({ code: 4010, data: null, message: "未提供有效的认证令牌" })
-      return
+      return c.json({ code: 4010, data: null, message: "未提供有效的认证令牌" })
     }
 
     const token = authHeader.slice(7)
@@ -44,15 +40,16 @@ export function createAuthMiddleware(deps: AppDependencies) {
 
       if (error || !data.user) {
         c.status(401)
-        c.json({ code: 4011, data: null, message: "认证令牌无效或已过期" })
-        return
+        return c.json({ code: 4011, data: null, message: "认证令牌无效或已过期" })
       }
 
       c.set("userId", data.user.id)
       await next()
     } catch {
       c.status(401)
-      c.json({ code: 4011, data: null, message: "认证令牌无效或已过期" })
+      return c.json({ code: 4011, data: null, message: "认证令牌无效或已过期" })
     }
   }
+
+  return handler
 }

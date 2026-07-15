@@ -111,4 +111,9 @@ export interface HttpClient {
     url: string,
     config?: Omit<RequestConfig, "url" | "method">
   ) => Promise<T>
+  /** 下载二进制文件（Blob），不进行 ApiResponse 解包 */
+  downloadBlob: (
+    url: string,
+    config?: Omit<RequestConfig, "url" | "method">
+  ) => Promise<Blob>
 }

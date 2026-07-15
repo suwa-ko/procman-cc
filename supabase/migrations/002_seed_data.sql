@@ -37,14 +37,14 @@ BEGIN
   SELECT "id" INTO cat_pack FROM categories WHERE "code" = 'CAT-005';
 
   INSERT INTO materials ("id", "code", "name", "spec", "unit", "categoryId", "description", "status") VALUES
-    (gen_random_uuid(), format('MAT-%s-%04d', mat_year, 1), '电阻器 10KΩ', '0805 ±1%', '个', cat_elec, '贴片电阻', 'active'),
-    (gen_random_uuid(), format('MAT-%s-%04d', mat_year, 2), '电容器 100μF', '25V 铝电解', '个', cat_elec, '铝电解电容', 'active'),
-    (gen_random_uuid(), format('MAT-%s-%04d', mat_year, 3), 'STM32F407VET6', 'ARM Cortex-M4', '片', cat_elec, '微控制器', 'active'),
-    (gen_random_uuid(), format('MAT-%s-%04d', mat_year, 4), '步进电机 42BYGH', '1.8° 1.5A', '台', cat_mach, '两相步进电机', 'active'),
-    (gen_random_uuid(), format('MAT-%s-%04d', mat_year, 5), 'A4 复印纸', '70g 500张/包', '包', cat_offi, '办公用纸', 'active'),
-    (gen_random_uuid(), format('MAT-%s-%04d', mat_year, 6), '工业酒精', '99.7% 500ml', '瓶', cat_chem, '清洗用酒精', 'active'),
-    (gen_random_uuid(), format('MAT-%s-%04d', mat_year, 7), '纸箱 K3K', '400×300×200mm', '个', cat_pack, '三层瓦楞纸箱', 'active'),
-    (gen_random_uuid(), format('MAT-%s-%04d', mat_year, 8), 'LED 灯珠', '5050 白光', '颗', cat_elec, 'SMD LED', 'active');
+    (gen_random_uuid(), 'MAT-' || mat_year::text || '-' || lpad(1::text, 4, '0'), '电阻器 10KΩ', '0805 ±1%', '个', cat_elec, '贴片电阻', 'active'),
+    (gen_random_uuid(), 'MAT-' || mat_year::text || '-' || lpad(2::text, 4, '0'), '电容器 100μF', '25V 铝电解', '个', cat_elec, '铝电解电容', 'active'),
+    (gen_random_uuid(), 'MAT-' || mat_year::text || '-' || lpad(3::text, 4, '0'), 'STM32F407VET6', 'ARM Cortex-M4', '片', cat_elec, '微控制器', 'active'),
+    (gen_random_uuid(), 'MAT-' || mat_year::text || '-' || lpad(4::text, 4, '0'), '步进电机 42BYGH', '1.8° 1.5A', '台', cat_mach, '两相步进电机', 'active'),
+    (gen_random_uuid(), 'MAT-' || mat_year::text || '-' || lpad(5::text, 4, '0'), 'A4 复印纸', '70g 500张/包', '包', cat_offi, '办公用纸', 'active'),
+    (gen_random_uuid(), 'MAT-' || mat_year::text || '-' || lpad(6::text, 4, '0'), '工业酒精', '99.7% 500ml', '瓶', cat_chem, '清洗用酒精', 'active'),
+    (gen_random_uuid(), 'MAT-' || mat_year::text || '-' || lpad(7::text, 4, '0'), '纸箱 K3K', '400×300×200mm', '个', cat_pack, '三层瓦楞纸箱', 'active'),
+    (gen_random_uuid(), 'MAT-' || mat_year::text || '-' || lpad(8::text, 4, '0'), 'LED 灯珠', '5050 白光', '颗', cat_elec, 'SMD LED', 'active');
 END $$;
 
 -- ====== 4. 供应商 ======
@@ -53,11 +53,11 @@ DECLARE
   sup_year INT := EXTRACT(YEAR FROM now())::INT;
 BEGIN
   INSERT INTO suppliers ("id", "code", "name", "creditCode", "contactPerson", "contactPhone", "address", "status") VALUES
-    (gen_random_uuid(), format('SUP-%s-%04d', sup_year, 1), '深圳华强电子有限公司', '91440300MA5D123456', '陈总', '0755-88886666', '深圳市福田区华强北路1002号', 'active'),
-    (gen_random_uuid(), format('SUP-%s-%04d', sup_year, 2), '北京神州数码有限公司', '91110108MA7E123456', '刘经理', '010-66668888', '北京市海淀区中关村大街1号', 'active'),
-    (gen_random_uuid(), format('SUP-%s-%04d', sup_year, 3), '上海晨光文具有限公司', '91310115MA1H123456', '周主管', '021-55552222', '上海市浦东新区张江高科技园区', 'active'),
-    (gen_random_uuid(), format('SUP-%s-%04d', sup_year, 4), '广州化工集团有限公司', '91440101MA5C123456', '吴副总', '020-33339999', '广州市黄埔区石化路88号', 'frozen'),
-    (gen_random_uuid(), format('SUP-%s-%04d', sup_year, 5), '成都精密机械厂', '91510100MA61X12345', '郑厂长', '028-77775555', '成都市高新区天府大道999号', 'active');
+    (gen_random_uuid(), 'SUP-' || sup_year::text || '-' || lpad(1::text, 4, '0'), '深圳华强电子有限公司', '91440300MA5D123456', '陈总', '0755-88886666', '深圳市福田区华强北路1002号', 'active'),
+    (gen_random_uuid(), 'SUP-' || sup_year::text || '-' || lpad(2::text, 4, '0'), '北京神州数码有限公司', '91110108MA7E123456', '刘经理', '010-66668888', '北京市海淀区中关村大街1号', 'active'),
+    (gen_random_uuid(), 'SUP-' || sup_year::text || '-' || lpad(3::text, 4, '0'), '上海晨光文具有限公司', '91310115MA1H123456', '周主管', '021-55552222', '上海市浦东新区张江高科技园区', 'active'),
+    (gen_random_uuid(), 'SUP-' || sup_year::text || '-' || lpad(4::text, 4, '0'), '广州化工集团有限公司', '91440101MA5C123456', '吴副总', '020-33339999', '广州市黄埔区石化路88号', 'frozen'),
+    (gen_random_uuid(), 'SUP-' || sup_year::text || '-' || lpad(5::text, 4, '0'), '成都精密机械厂', '91510100MA61X12345', '郑厂长', '028-77775555', '成都市高新区天府大道999号', 'active');
 END $$;
 
 -- ====== 5. 定价（关联供应商 + 物料） ======
@@ -100,7 +100,7 @@ BEGIN
   INSERT INTO templates ("id", "code", "name", "contractType", "htmlContent", "variables", "enabled") VALUES
     (
       gen_random_uuid(),
-      format('TPL-%s-%04d', tpl_year, 1),
+      'TPL-' || tpl_year::text || '-' || lpad(1::text, 4, '0'),
       '通用采购合同模板',
       'purchase_contract',
       $tmpl$<!-- 合同编号 -->
@@ -278,7 +278,7 @@ BEGIN
     ),
     (
       gen_random_uuid(),
-      format('TPL-%s-%04d', tpl_year, 2),
+      'TPL-' || tpl_year::text || '-' || lpad(2::text, 4, '0'),
       '保密协议模板',
       'nda',
       $tmpl$<!-- 合同编号 -->
@@ -418,7 +418,7 @@ BEGIN
 
   -- 合同1：电子元器件采购
   INSERT INTO contracts ("id", "code", "name", "type", "supplierId", "handlerId", "handlerName", "templateId", "content", "totalAmount", "status")
-  VALUES (gen_random_uuid(), format('CTT-%s-%04d', ctt_year, 1), '电子元器件采购合同', 'purchase_contract', s_elec, p1, '张三', t1, '{"signingPlace":"深圳市"}'::jsonb, 350000, 'effective')
+  VALUES (gen_random_uuid(), 'CTT-' || ctt_year::text || '-' || lpad(1::text, 4, '0'), '电子元器件采购合同', 'purchase_contract', s_elec, p1, '张三', t1, '{"signingPlace":"深圳市"}'::jsonb, 350000, 'effective')
   RETURNING "id" INTO c1;
 
   INSERT INTO contract_entries ("id", "contractId", "materialId", "materialName", "spec", "unitPrice", "quantity", "unit", "totalPrice", "sortOrder") VALUES
@@ -428,7 +428,7 @@ BEGIN
 
   -- 合同2：办公用纸采购
   INSERT INTO contracts ("id", "code", "name", "type", "supplierId", "handlerId", "handlerName", "templateId", "content", "totalAmount", "status")
-  VALUES (gen_random_uuid(), format('CTT-%s-%04d', ctt_year, 2), 'A4 复印纸年度采购', 'purchase_contract', s_offi, p2, '李四', t1, '{"signingPlace":"上海市"}'::jsonb, 50000, 'draft')
+  VALUES (gen_random_uuid(), 'CTT-' || ctt_year::text || '-' || lpad(2::text, 4, '0'), 'A4 复印纸年度采购', 'purchase_contract', s_offi, p2, '李四', t1, '{"signingPlace":"上海市"}'::jsonb, 50000, 'draft')
   RETURNING "id" INTO c2;
 
   INSERT INTO contract_entries ("id", "contractId", "materialId", "materialName", "spec", "unitPrice", "quantity", "unit", "totalPrice", "sortOrder") VALUES
@@ -436,7 +436,7 @@ BEGIN
 
   -- 合同3：步进电机
   INSERT INTO contracts ("id", "code", "name", "type", "supplierId", "handlerId", "handlerName", "templateId", "content", "totalAmount", "status")
-  VALUES (gen_random_uuid(), format('CTT-%s-%04d', ctt_year, 3), '步进电机采购合同', 'purchase_contract', s_mach, p1, '张三', t1, '{"signingPlace":"成都市"}'::jsonb, 120000, 'draft')
+  VALUES (gen_random_uuid(), 'CTT-' || ctt_year::text || '-' || lpad(3::text, 4, '0'), '步进电机采购合同', 'purchase_contract', s_mach, p1, '张三', t1, '{"signingPlace":"成都市"}'::jsonb, 120000, 'draft')
   RETURNING "id" INTO c3;
 
   INSERT INTO contract_entries ("id", "contractId", "materialId", "materialName", "spec", "unitPrice", "quantity", "unit", "totalPrice", "sortOrder") VALUES

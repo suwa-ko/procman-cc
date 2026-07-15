@@ -17,7 +17,7 @@ import { createLogger, LEVEL_VALUES } from "@ps/log"
 import { createApp } from "./app"
 
 // ---------- 1. 加载环境配置 ----------
-const config = loadConfig()
+const config = loadConfig({ overrides: process.env as Record<string, string | undefined> })
 
 // ---------- 2. 初始化日志 ----------
 const logger = createLogger({

@@ -37,8 +37,8 @@ export function health(deps: AppDependencies): Hono {
 
     try {
       const result: unknown = await deps.db.supabase
-        .from("_health_check")
-        .limit(1)
+        .from("suppliers")
+        .select("id", { count: "exact", head: true })
 
       if (Array.isArray(result)) {
         // Mock 客户端：直接返回数据数组

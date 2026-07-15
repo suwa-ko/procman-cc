@@ -260,6 +260,48 @@ export function createHttpClient(options: HttpClientOptions): HttpClient {
     return unwrapResponse<T>(interceptedResponse)
   }
 
+  async function downloadBlob(
+    url: string,
+    config?: Omit<RequestConfig, "url" | "method">
+  ): Promise<Blob> {
+    const context: RequestContext = {
+      url,
+      method: "GET",
+      baseURL: options.baseURL,
+      headers: { ...defaultHeaders, ...config?.headers },
+      timeout: config?.timeout ?? defaultTimeout,
+    }
+    const intercepted = await runRequestInterceptors(context, reqInterceptors)
+    const { signal, cleanup } = createTimeoutSignal(
+      intercepted.timeout ?? defaultTimeout,
+      intercepted.signal
+    )
+    try {
+      const resp = await fetch(
+        buildUrl(intercepted.baseURL, intercepted.url, intercepted.params),
+        { method: intercepted.method, headers: intercepted.headers, signal }
+      )
+      if (!resp.ok) {
+        throw new HttpClientError(
+          `HTTP ${resp.status} ${resp.statusText}`,
+          { status: resp.status, config: intercepted }
+        )
+      }
+      return await resp.blob()
+    } catch (err) {
+      if (err instanceof HttpClientError) {
+        throw err
+      }
+      if (err instanceof Error && err.name === "AbortError") {
+        throw new HttpClientError("下载超时或被取消", { status: 0, config: intercepted })
+      }
+      const message = err instanceof Error ? err.message : "下载失败"
+      throw new HttpClientError(message, { status: 0, config: intercepted })
+    } finally {
+      cleanup()
+    }
+  }
+
   return {
     request,
     get: <T = unknown>(
@@ -285,5 +327,6 @@ export function createHttpClient(options: HttpClientOptions): HttpClient {
       url: string,
       config?: Omit<RequestConfig, "url" | "method">
     ) => request<T>({ url, method: "DELETE", ...config }),
+    downloadBlob,
   }
 }

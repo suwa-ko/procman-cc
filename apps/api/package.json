@@ -8,19 +8,23 @@
     "build": "vite build",
     "start": "node dist/index.mjs",
     "test": "vitest run",
+    "test:integration": "vitest run --config vitest.integration.config.ts",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src --ext .ts"
   },
   "dependencies": {
     "@hono/node-server": "catalog:",
+    "@hono/zod-openapi": "^1.4.0",
     "@ps/contracts": "workspace:*",
     "@ps/db": "workspace:*",
     "@ps/env-config": "workspace:*",
     "@ps/log": "workspace:*",
+    "@ps/model-core": "workspace:*",
     "@ps/pdf": "workspace:*",
     "@ps/types-base": "workspace:*",
     "@ps/utils": "workspace:*",
+    "@scalar/hono-api-reference": "^0.11.9",
     "hono": "catalog:",
     "zod": "catalog:"
   },

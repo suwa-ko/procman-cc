@@ -33,7 +33,6 @@ import {
 import type { ColumnsType } from "antd/es/table"
 import React, { useCallback, useMemo, useState } from "react"
 
-
 const STATUS_OPTIONS: { label: string; value: PricingStatus | "" }[] = [
   { label: "全部", value: "" },
   { label: "有效", value: "active" as PricingStatus },
@@ -69,12 +68,9 @@ export const PricingPage: React.FC = () => {
     }))
   }, [])
 
-  const handlePageChange = useCallback(
-    (page: number, pageSize: number) => {
-      setQuery((prev) => ({ ...prev, page, pageSize }))
-    },
-    [],
-  )
+  const handlePageChange = useCallback((page: number, pageSize: number) => {
+    setQuery((prev) => ({ ...prev, page, pageSize }))
+  }, [])
 
   const openCreate = useCallback(() => {
     form.resetFields()
@@ -82,20 +78,34 @@ export const PricingPage: React.FC = () => {
     setModalOpen(true)
   }, [form])
 
+  const openEdit = useCallback(
+    (record: PricingDTO) => {
+      form.setFieldsValue({
+        supplierId: record.supplierId,
+        materialId: record.materialId,
+        unitPrice: record.unitPrice,
+        currency: record.currency,
+        remark: record.remark,
+      })
+      setEditing(record)
+      setModalOpen(true)
+    },
+    [form]
+  )
+
   const handleSubmit = useCallback(async () => {
-    try {
-      const values = await form.validateFields()
-      if (editing !== null) {
-        await updateMutation.mutateAsync({ id: editing.id, data: values })
-        message.success("定价更新成功").then(() => {}, () => {})
-      } else {
-        await createMutation.mutateAsync(values as CreatePricingRequest)
-        message.success("定价创建成功").then(() => {}, () => {})
-      }
-      setModalOpen(false)
-    } catch {
-      // eslint-disable-next-line no-empty
+    const values = await form.validateFields().catch(() => undefined)
+    if (values === undefined) {
+      return
     }
+    if (editing !== null) {
+      await updateMutation.mutateAsync({ id: editing.id, data: values })
+      message.success("定价更新成功").then(() => {}, () => {})
+    } else {
+      await createMutation.mutateAsync(values as CreatePricingRequest)
+      message.success("定价创建成功").then(() => {}, () => {})
+    }
+    setModalOpen(false)
   }, [editing, form, createMutation, updateMutation])
 
   const handleDelete = useCallback(
@@ -103,14 +113,24 @@ export const PricingPage: React.FC = () => {
       await deleteMutation.mutateAsync(id)
       message.success("定价已删除").then(() => {}, () => {})
     },
-    [deleteMutation],
+    [deleteMutation]
   )
 
   const columns = useMemo<ColumnsType<PricingDTO>>(
     () => [
       { title: "编码", dataIndex: "code", key: "code", width: 120 },
-      { title: "供应商", dataIndex: "supplierName", key: "supplierName", width: 180 },
-      { title: "物料", dataIndex: "materialName", key: "materialName", width: 160 },
+      {
+        title: "供应商",
+        dataIndex: "supplierName",
+        key: "supplierName",
+        width: 180,
+      },
+      {
+        title: "物料",
+        dataIndex: "materialName",
+        key: "materialName",
+        width: 160,
+      },
       {
         title: "含税单价",
         dataIndex: "unitPrice",
@@ -145,6 +165,15 @@ export const PricingPage: React.FC = () => {
         fixed: "right",
         render: (_: unknown, record: PricingDTO) => (
           <Space>
+            <Button
+              type="link"
+              size="small"
+              onClick={() => {
+                openEdit(record)
+              }}
+            >
+              编辑
+            </Button>
             <Popconfirm
               title="确定删除该定价？"
               onConfirm={() => {
@@ -159,7 +188,7 @@ export const PricingPage: React.FC = () => {
         ),
       },
     ],
-    [handleDelete],
+    [handleDelete, openEdit]
   )
 
   return (
@@ -194,14 +223,14 @@ export const PricingPage: React.FC = () => {
       />
 
       <Modal
-        title="新增定价"
+        title={editing !== null ? "编辑定价" : "新增定价"}
         open={modalOpen}
         onOk={() => {
-  handleSubmit().catch(() => {})
-}}
+          handleSubmit().catch(() => {})
+        }}
         onCancel={() => {
- setModalOpen(false)
-}}
+          setModalOpen(false)
+        }}
         destroyOnHidden
         width={520}
         confirmLoading={createMutation.isPending || updateMutation.isPending}

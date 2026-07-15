@@ -101,19 +101,18 @@ export const SupplierPage: React.FC = () => {
   )
 
   const handleSubmit = useCallback(async () => {
-    try {
-      const values = await form.validateFields()
-      if (editing !== null) {
-        await updateMutation.mutateAsync({ id: editing.id, data: values })
-        message.success("供应商更新成功").then(() => {}, () => {})
-      } else {
-        await createMutation.mutateAsync(values as CreateSupplierRequest)
-        message.success("供应商创建成功").then(() => {}, () => {})
-      }
-      setModalOpen(false)
-    } catch {
-      // 表单校验失败时 form.validateFields 会抛出异常
+    const values = await form.validateFields().catch(() => undefined)
+    if (values === undefined) {
+      return
     }
+    if (editing !== null) {
+      await updateMutation.mutateAsync({ id: editing.id, data: values })
+      message.success("供应商更新成功").then(() => {}, () => {})
+    } else {
+      await createMutation.mutateAsync(values as CreateSupplierRequest)
+      message.success("供应商创建成功").then(() => {}, () => {})
+    }
+    setModalOpen(false)
   }, [editing, form, createMutation, updateMutation])
 
   const handleDelete = useCallback(

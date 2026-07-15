@@ -28,6 +28,7 @@
   "dependencies": {
     "@ps/log": "workspace:*",
     "@ps/model": "workspace:*",
+    "@ps/model-core": "workspace:*",
     "@ps/types-base": "workspace:*",
     "@supabase/supabase-js": "^2.45.0"
   },

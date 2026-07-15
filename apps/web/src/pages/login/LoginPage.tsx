@@ -1,9 +1,11 @@
 /**
  * 登录页 — 用户名 + 密码登录。
+ * 使用 @ps/web-kit HttpClient 统一请求（不直接调用 fetch）。
  */
 
 import { LockOutlined, UserOutlined } from "@ant-design/icons"
 import type { LoginRequest } from "@ps/contracts"
+import { getHttpClient } from "@ps/web-kit"
 import { Button, Card, Form, Input, message, Typography } from "antd"
 import React, { useCallback, useState } from "react"
 import { useNavigate } from "react-router-dom"
@@ -18,30 +20,22 @@ export const LoginPage: React.FC = () => {
     async (values: LoginRequest) => {
       setLoading(true)
       try {
-        const resp = await fetch("/api/auth/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(values),
-        })
-        const data = (await resp.json()) as {
-          code: number
-          data: { token: string } | null
-          message: string
-        }
-        if (data.code === 0 && data.data !== null) {
-          localStorage.setItem("token", data.data.token)
-          message.success("登录成功").then(() => {}, () => {})
-          navigate("/suppliers")
-        } else {
-          message.error(data.message || "登录失败").then(() => {}, () => {})
-        }
-      } catch {
-        message.error("网络错误").then(() => {}, () => {})
+        const httpClient = getHttpClient()
+        const data = await httpClient.post<{
+          token: string
+          user: unknown
+        }>("/api/auth/login", values)
+        localStorage.setItem("purchase_system_token", data.token)
+        message.success("登录成功").then(() => {}, () => {})
+        navigate("/suppliers")
+      } catch (err: unknown) {
+        const msg = err instanceof Error ? err.message : "网络错误"
+        message.error(msg).then(() => {}, () => {})
       } finally {
         setLoading(false)
       }
     },
-    [navigate],
+    [navigate]
   )
 
   return (
@@ -61,8 +55,8 @@ export const LoginPage: React.FC = () => {
         <Form<LoginRequest>
           layout="vertical"
           onFinish={(values) => {
-  onFinish(values).catch(() => {})
-}}
+            onFinish(values).catch(() => {})
+          }}
           autoComplete="off"
         >
           <Form.Item

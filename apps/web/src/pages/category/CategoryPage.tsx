@@ -73,19 +73,18 @@ export const CategoryPage: React.FC = () => {
   )
 
   const handleSubmit = useCallback(async () => {
-    try {
-      const values = await form.validateFields()
-      if (editing !== null) {
-        await updateMutation.mutateAsync({ id: editing.id, data: values })
-        message.success("品类更新成功").then(() => {}, () => {})
-      } else {
-        await createMutation.mutateAsync(values as CreateCategoryRequest)
-        message.success("品类创建成功").then(() => {}, () => {})
-      }
-      setModalOpen(false)
-    } catch {
-      // eslint-disable-next-line no-empty
+    const values = await form.validateFields().catch(() => undefined)
+    if (values === undefined) {
+      return
     }
+    if (editing !== null) {
+      await updateMutation.mutateAsync({ id: editing.id, data: values })
+      message.success("品类更新成功").then(() => {}, () => {})
+    } else {
+      await createMutation.mutateAsync(values as CreateCategoryRequest)
+      message.success("品类创建成功").then(() => {}, () => {})
+    }
+    setModalOpen(false)
   }, [editing, form, createMutation, updateMutation])
 
   const handleDelete = useCallback(
