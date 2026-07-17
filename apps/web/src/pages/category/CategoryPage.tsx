@@ -48,7 +48,10 @@ export const CategoryPage: React.FC = () => {
   const updateMutation = useUpdateCategory()
   const deleteMutation = useDeleteCategory()
 
-  const categories = useMemo<CategoryDTO[]>(() => data?.data ?? [], [data])
+  const categories = useMemo<CategoryDTO[]>(
+    () => [...(data?.data ?? [])].sort((a, b) => a.sortOrder - b.sortOrder),
+    [data],
+  )
 
   const handlePageChange = useCallback(
     (page: number, pageSize: number) => {
@@ -105,6 +108,8 @@ export const CategoryPage: React.FC = () => {
         key: "sortOrder",
         width: 80,
         align: "center",
+        sorter: (a, b) => a.sortOrder - b.sortOrder,
+        defaultSortOrder: "ascend",
       },
       { title: "描述", dataIndex: "description", key: "description" },
       {

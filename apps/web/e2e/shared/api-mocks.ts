@@ -102,6 +102,7 @@ export function setupCrudRoutes<T extends SeedEntity>(
   page: Page,
   store: CrudMockStore<T>,
   baseUrl: string,
+  defaultFields?: () => Partial<T>,
 ): Promise<void> {
   return page.route(new RegExp(baseUrl), async (route) => {
     const url = new URL(route.request().url())
@@ -148,7 +149,9 @@ export function setupCrudRoutes<T extends SeedEntity>(
     // --- CREATE ---
     if (method === "POST") {
       const body = route.request().postDataJSON() as Partial<T>
+      const defs = defaultFields ? defaultFields() : ({} as Partial<T>)
       const newItem = {
+        ...defs,
         ...body,
         id: `mock-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
       } as T

@@ -111,7 +111,12 @@ test.describe("演示 — 品类管理", () => {
       status: "active",
     }))
     await injectAuth(page)
-    await setupCrudRoutes(page, store, "/api/categories")
+    await setupCrudRoutes(page, store, "/api/categories", () => ({
+      code: `CAT-${Date.now().toString(36).toUpperCase()}`,
+      createdAt: new Date().toISOString(),
+      status: "active",
+      sortOrder: store.items.length + 1,
+    } as Partial<CategorySeed>))
   })
 
   test("新增 → 编辑 → 删除", async ({ page }) => {
@@ -202,7 +207,11 @@ test.describe("演示 — 物料管理", () => {
       status: "active",
     }))
     await injectAuth(page)
-    await setupCrudRoutes(page, matStore, "/api/materials")
+    await setupCrudRoutes(page, matStore, "/api/materials", () => ({
+      code: `MAT-${Date.now().toString(36).toUpperCase()}`,
+      createdAt: new Date().toISOString(),
+      status: "active",
+    } as Partial<MaterialSeed>))
     await setupCrudRoutes(page, catStore, "/api/categories")
   })
 
@@ -284,7 +293,11 @@ test.describe("演示 — 供应商管理", () => {
       createdAt: "2026-01-01T00:00:00.000Z",
     }))
     await injectAuth(page)
-    await setupCrudRoutes(page, store, "/api/suppliers")
+    await setupCrudRoutes(page, store, "/api/suppliers", () => ({
+      code: `SUP-${Date.now().toString(36).toUpperCase()}`,
+      createdAt: new Date().toISOString(),
+      status: "active",
+    } as Partial<SupplierSeed>))
   })
 
   test("新增 → 编辑 → 删除", async ({ page }) => {
@@ -365,7 +378,11 @@ test.describe("演示 — 合同模板管理", () => {
       createdAt: "2026-01-01T00:00:00.000Z",
     }))
     await injectAuth(page)
-    await setupCrudRoutes(page, store, "/api/templates")
+    await setupCrudRoutes(page, store, "/api/templates", () => ({
+      code: `TPL-${Date.now().toString(36).toUpperCase()}`,
+      createdAt: new Date().toISOString(),
+      enabled: true,
+    } as Partial<TemplateSeed>))
   })
 
   test("新增 → 编辑 → 删除", async ({ page }) => {
@@ -454,7 +471,11 @@ test.describe("演示 — 定价管理", () => {
       createdAt: "2026-01-01T00:00:00.000Z",
     }))
     await injectAuth(page)
-    await setupCrudRoutes(page, pricingStore, "/api/pricings")
+    await setupCrudRoutes(page, pricingStore, "/api/pricings", () => ({
+      code: `PRC-${Date.now().toString(36).toUpperCase()}`,
+      currency: "CNY",
+      status: "active",
+    } as Partial<PricingSeed>))
     await setupCrudRoutes(page, supStore, "/api/suppliers")
   })
 
@@ -545,7 +566,10 @@ test.describe("演示 — 合同管理", () => {
       createdAt: "2026-01-01T00:00:00.000Z",
     }))
     await injectAuth(page)
-    await setupCrudRoutes(page, contractStore, "/api/contracts")
+    await setupCrudRoutes(page, contractStore, "/api/contracts", () => ({
+      code: `CTR-${Date.now().toString(36).toUpperCase()}`,
+      status: "draft",
+    } as Partial<ContractSeed>))
     await setupCrudRoutes(page, supStore, "/api/suppliers")
     await setupCrudRoutes(page, tplStore, "/api/templates")
 

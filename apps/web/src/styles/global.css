@@ -1,0 +1,459 @@
+/* ================================================================
+   采购管理系统 — 毛玻璃 + 动效增强全局样式
+   ================================================================ */
+
+/* ---------- 基础重置 ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* ---------- 动态渐变背景 ---------- */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e8eaf6 0%, #f3e5f5 25%, #e0f2f1 50%, #e3f2fd 75%, #ede7f6 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 20s ease infinite;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "Noto Sans", "PingFang SC", "Microsoft YaHei", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  25%  { background-position: 100% 0%; }
+  50%  { background-position: 100% 100%; }
+  75%  { background-position: 0% 100%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ================================================================
+   通用动效 Keyframes
+   ================================================================ */
+
+/* 内容区淡入上滑 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 缩放淡入 */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 表格行交错进入 */
+@keyframes tableRowIn {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 按钮光晕呼吸 */
+@keyframes btnGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
+  50%      { box-shadow: 0 0 0 6px rgba(99, 102, 241, 0); }
+}
+
+/* Tag 闪烁 */
+@keyframes tagShimmer {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.75; }
+}
+
+/* 骨架屏闪烁 */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* 顶部光轨扫过 */
+@keyframes headerGlow {
+  0%   { left: -100%; }
+  100% { left: 200%; }
+}
+
+/* 选中指示器脉动 */
+@keyframes selectedPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.2); }
+  50%      { box-shadow: 0 0 0 8px rgba(99, 102, 241, 0); }
+}
+
+/* Menu icon 跳动 */
+@keyframes menuIconBounce {
+  0%, 100% { transform: translateY(0); }
+  40%      { transform: translateY(-3px); }
+}
+
+/* 浮动光斑 */
+@keyframes floatUpDown {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-20px) scale(1.05); }
+}
+
+/* ---------- 玻璃基类 ---------- */
+.glass {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(99, 102, 241, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* ---------- 内容区路由切换动效 ---------- */
+.page-enter {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+/* Table 固定列实色背景 */
+.glass-card .ant-table-cell-fix-right,
+.glass-card .ant-table-cell-fix-left {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ---------- 滚动条 ---------- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.25);
+  border-radius: 3px;
+  transition: background 0.2s;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.45);
+}
+
+/* ---------- Sidebar Logo ---------- */
+.logo-gradient {
+  font-size: 16px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a78bfa 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 6s ease infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: opacity 0.3s;
+}
+
+/* ================================================================
+   antd 全局覆盖
+   ================================================================ */
+
+/* --- Table --- */
+
+/* 表头现代化 */
+.ant-table-thead > tr > th {
+  background: rgba(99, 102, 241, 0.04) !important;
+  font-weight: 600 !important;
+  color: #4338ca !important;
+  border-bottom: 2px solid rgba(99, 102, 241, 0.12) !important;
+  transition: background 0.3s;
+}
+
+/* 行 hover 平滑过渡 */
+.ant-table-tbody > tr.ant-table-row > td {
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.ant-table-tbody > tr.ant-table-row {
+  animation: tableRowIn 0.4s ease-out both;
+}
+
+/* 交错：每行延迟 50ms */
+.ant-table-tbody > tr.ant-table-row:nth-child(1)  { animation-delay: 0.05s; }
+.ant-table-tbody > tr.ant-table-row:nth-child(2)  { animation-delay: 0.10s; }
+.ant-table-tbody > tr.ant-table-row:nth-child(3)  { animation-delay: 0.15s; }
+.ant-table-tbody > tr.ant-table-row:nth-child(4)  { animation-delay: 0.20s; }
+.ant-table-tbody > tr.ant-table-row:nth-child(5)  { animation-delay: 0.25s; }
+.ant-table-tbody > tr.ant-table-row:nth-child(6)  { animation-delay: 0.30s; }
+.ant-table-tbody > tr.ant-table-row:nth-child(7)  { animation-delay: 0.35s; }
+.ant-table-tbody > tr.ant-table-row:nth-child(8)  { animation-delay: 0.40s; }
+.ant-table-tbody > tr.ant-table-row:nth-child(9)  { animation-delay: 0.45s; }
+.ant-table-tbody > tr.ant-table-row:nth-child(10) { animation-delay: 0.50s; }
+
+.ant-table-tbody > tr.ant-table-row:hover > td {
+  background: rgba(99, 102, 241, 0.03) !important;
+  transform: translateX(2px);
+}
+
+.ant-table-tbody > tr.ant-table-row-selected > td {
+  background: rgba(99, 102, 241, 0.06) !important;
+}
+
+/* --- Button --- */
+
+/* 主按钮光晕 */
+.ant-btn-primary {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.ant-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35) !important;
+}
+.ant-btn-primary:active {
+  transform: translateY(0);
+}
+
+/* 危险按钮 hover */
+.ant-btn-dangerous:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.3) !important;
+}
+
+/* Link 按钮 */
+.ant-btn-link {
+  transition: all 0.2s ease !important;
+}
+.ant-btn-link:hover {
+  letter-spacing: 0.5px;
+}
+
+/* --- Modal --- */
+
+.ant-modal-content {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 24px 64px rgba(99, 102, 241, 0.12), 0 4px 16px rgba(0, 0, 0, 0.06) !important;
+  transition: box-shadow 0.3s;
+}
+
+.ant-modal-header {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(99, 102, 241, 0.08) !important;
+  border-radius: 20px 20px 0 0 !important;
+}
+
+.ant-modal-footer {
+  background: transparent !important;
+  border-top: 1px solid rgba(99, 102, 241, 0.08) !important;
+}
+
+/* Modal 遮罩淡入 */
+.ant-modal-mask {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* --- Popconfirm --- */
+.ant-popover-inner {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1) !important;
+  animation: scaleIn 0.2s ease-out;
+}
+
+/* --- Select 下拉 --- */
+.ant-select-dropdown {
+  background: rgba(255, 255, 255, 0.88) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 12px !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08) !important;
+  animation: fadeInUp 0.2s ease-out;
+}
+
+.ant-select-item {
+  transition: background 0.2s, padding-left 0.2s !important;
+}
+.ant-select-item-option-selected {
+  font-weight: 600;
+}
+
+/* --- Input --- */
+.ant-input,
+.ant-input-number,
+.ant-picker {
+  transition: all 0.3s ease !important;
+}
+.ant-input:focus,
+.ant-input-focused,
+.ant-input-number-focused,
+.ant-picker-focused {
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12) !important;
+}
+.ant-input:hover,
+.ant-input-number:hover,
+.ant-picker:hover {
+  border-color: rgba(99, 102, 241, 0.4) !important;
+}
+
+/* --- Tag --- */
+.ant-tag {
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+.ant-tag:hover {
+  transform: scale(1.04);
+}
+
+/* 状态标签颜色 */
+.ant-tag-green {
+  background: rgba(16, 185, 129, 0.1) !important;
+  color: #059669 !important;
+  border-color: rgba(16, 185, 129, 0.25) !important;
+}
+.ant-tag-red {
+  background: rgba(239, 68, 68, 0.1) !important;
+  color: #dc2626 !important;
+  border-color: rgba(239, 68, 68, 0.25) !important;
+}
+.ant-tag-blue {
+  background: rgba(99, 102, 241, 0.1) !important;
+  color: #4f46e5 !important;
+  border-color: rgba(99, 102, 241, 0.25) !important;
+}
+.ant-tag-default {
+  background: rgba(107, 114, 128, 0.08) !important;
+  color: #6b7280 !important;
+  border-color: rgba(107, 114, 128, 0.2) !important;
+}
+
+/* --- Steps --- */
+.ant-steps-item-active .ant-steps-item-title {
+  font-weight: 600 !important;
+}
+.ant-steps-item-finish .ant-steps-item-tail::after {
+  transition: background 0.4s ease;
+}
+
+/* --- Pagination --- */
+.ant-pagination-item {
+  transition: all 0.2s ease;
+}
+.ant-pagination-item-active {
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+}
+
+/* --- Tabs --- */
+.ant-tabs-tab {
+  transition: color 0.3s, transform 0.2s !important;
+}
+.ant-tabs-tab:hover {
+  transform: translateY(-1px);
+}
+
+/* --- Skeleton 骨架屏 --- */
+.ant-skeleton.ant-skeleton-active .ant-skeleton-content .ant-skeleton-title,
+.ant-skeleton.ant-skeleton-active .ant-skeleton-content .ant-skeleton-paragraph > li {
+  background: linear-gradient(
+    90deg,
+    rgba(99, 102, 241, 0.06) 25%,
+    rgba(99, 102, 241, 0.12) 37%,
+    rgba(99, 102, 241, 0.06) 63%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease infinite;
+}
+
+/* --- Spin 加载 --- */
+.ant-spin-dot-item {
+  background: #6366f1 !important;
+}
+
+/* --- Switch --- */
+.ant-switch-checked {
+  background: #6366f1 !important;
+}
+.ant-switch-checked:hover:not(.ant-switch-disabled) {
+  background: #818cf8 !important;
+}
+
+/* --- Menu --- */
+.ant-menu-item {
+  transition: background 0.3s ease, padding-left 0.3s ease !important;
+}
+.ant-menu-item-selected {
+  border-radius: 10px !important;
+}
+
+/* ================================================================
+   页面特定动效
+   ================================================================ */
+
+/* 顶部操作栏入场 */
+.action-bar {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* 统计数据卡片 */
+.stat-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(99, 102, 241, 0.15);
+}
+
+/* message 提示滑入 */
+.ant-message-notice {
+  animation: fadeInUp 0.3s ease-out;
+}
+.ant-message-notice-leave {
+  animation: fadeOutDown 0.25s ease-in forwards;
+}
+
+@keyframes fadeOutDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
