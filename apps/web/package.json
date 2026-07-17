@@ -9,10 +9,13 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src --ext .ts,.tsx"
   },
   "dependencies": {
+    "@ant-design/icons": "catalog:",
     "@ps/antd-kit": "workspace:*",
     "@ps/contracts": "workspace:*",
     "@ps/env-config": "workspace:*",
@@ -23,15 +26,15 @@
     "@ps/model-core": "workspace:*",
     "@ps/types-base": "workspace:*",
     "@ps/web-kit": "workspace:*",
-    "antd": "catalog:",
-    "@ant-design/icons": "catalog:",
     "@tanstack/react-query": "catalog:",
+    "antd": "catalog:",
     "dayjs": "^1.11.0",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-router-dom": "catalog:"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.1",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@typescript-eslint/eslint-plugin": "catalog:",

@@ -152,3 +152,9 @@ const db = createDbClient(config, logger)
 | `.trae/documents/产品需求文档.md`     | 业务需求、数据模型、校验规则     |
 | `.trae/documents/工程结构设计文档.md` | 完整架构设计、依赖矩阵、实施路径 |
 | `.trae/rules/project_rules.md`        | 项目规则（AI 强制约束）          |
+
+# 演示
+
+'''
+pnpm --filter @ps/web test:e2e -- --headed demo.spec.ts
+'''

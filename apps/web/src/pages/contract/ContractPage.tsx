@@ -497,10 +497,14 @@ export const ContractPage: React.FC = () => {
             {(formValues.name as string) ?? "—"}
           </Descriptions.Item>
           <Descriptions.Item label="模板ID">
-            {(formValues.templateId as string) ?? "—"}
+            {typeof formValues.templateId === "object" && formValues.templateId !== null
+              ? (formValues.templateId as { id: string; name?: string }).id
+              : (formValues.templateId as string) ?? "—"}
           </Descriptions.Item>
           <Descriptions.Item label="供应商ID">
-            {(formValues.supplierId as string) ?? "—"}
+            {typeof formValues.supplierId === "object" && formValues.supplierId !== null
+              ? (formValues.supplierId as { id: string; name?: string }).id
+              : (formValues.supplierId as string) ?? "—"}
           </Descriptions.Item>
           <Descriptions.Item label="合同金额">
             {formValues.totalAmount !== undefined

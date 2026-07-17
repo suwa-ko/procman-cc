@@ -69,5 +69,13 @@ export function wrapClientWithAuth(
         ...config,
         headers: { ...authHeaders, ...config?.headers },
       }),
+    downloadBlob: (
+      url: string,
+      config?: Omit<RequestConfig, "url" | "method">
+    ) =>
+      client.downloadBlob(url, {
+        ...config,
+        headers: { ...authHeaders, ...config?.headers },
+      }),
   }
 }

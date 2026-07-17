@@ -69,7 +69,7 @@ export const App: React.FC = () => {
     <ConfigProvider locale={zhCN}>
       <AppProvider
         httpClient={httpClient}
-        environment={{ mode: "mock" as const, apiBaseUrl: config.apiBaseUrl }}
+        environment={{ mode: config.env, apiBaseUrl: config.apiBaseUrl }}
       >
         <BrowserRouter>
           <Suspense fallback={<PageLoader />}>

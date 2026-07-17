@@ -9,7 +9,7 @@
  *   5. ReactDOM.render() → 渲染应用
  */
 
-
+import type { AppEnv } from "@ps/env-config"
 import { loadConfig } from "@ps/env-config"
 import { createLogger, LEVEL_VALUES } from "@ps/log"
 import { setupHttpClient } from "@ps/web-kit"
@@ -19,7 +19,10 @@ import ReactDOM from "react-dom/client"
 import { App } from "./App"
 
 // ---------- 1. 加载环境配置 ----------
-const config = loadConfig({ env: "mock" })
+// 通过 VITE_APP_ENV 切换环境，默认 mock（安全默认值）
+const rawEnv = import.meta.env.VITE_APP_ENV as string | undefined
+const appEnv: AppEnv = rawEnv === "dev" || rawEnv === "prod" ? rawEnv : "mock"
+const config = loadConfig({ env: appEnv, overrides: import.meta.env })
 
 // ---------- 2. 初始化日志 ----------
 const logger = createLogger({
